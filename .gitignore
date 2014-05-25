@@ -1,3 +1,4 @@
+.rakeTasks
 *.gem
 *.rbc
 .bundle
@@ -20,3 +21,6 @@ tmp
 *.o
 *.a
 mkmf.log
+*.iml
+*.ipr
+*.iws
