@@ -1,5 +1,8 @@
-require "moments/version"
+require 'moments/version'
+require 'moments/difference'
 
 module Moments
-  # Your code goes here...
+  def self.difference(from, to)
+    Moments::Difference.new from, to
+  end
 end
