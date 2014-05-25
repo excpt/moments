@@ -3,9 +3,5 @@ script: "bundle exec rspec"
 rvm:
   - 2.1.0
   - jruby-19mode
-  - rbx-2
   - ruby-head
   - jruby-head
-addons:
-  code_climate:
-    repo_token: "83c2e090282b16d91251419d1258e47c82d725056835a1daef193077cbb2a0e6"
