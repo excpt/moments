@@ -7,7 +7,7 @@ module Moments
     MAJOR = 0
     MINOR = 0
     TINY  = 1
-    PRE   = 'dev'
+    PRE   = 'alpha'
 
     STRING = [MAJOR, MINOR, TINY, PRE].compact.join('.')
   end
