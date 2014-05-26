@@ -156,6 +156,26 @@ describe Moments::Difference do
         Moments::Difference.new(from, to).to_hash.should == expectation
       end
     end
+
+    context 'leap year' do
+      it '2008-02-27, 2008-02-029' do
+        from = Time.new 2008, 2, 27
+        to   = Time.new 2008, 2, 29
+
+        expectation = { years: 0, months: 0, days: 2, hours: 0, minutes: 0, seconds: 0 }
+
+        Moments::Difference.new(from, to).to_hash.should == expectation
+      end
+
+      it '2008-02-27, 2008-03-01' do
+        from = Time.new 2008, 2, 27
+        to   = Time.new 2008, 3, 1
+
+        expectation = { years: 0, months: 0, days: 3, hours: 0, minutes: 0, seconds: 0 }
+
+        Moments::Difference.new(from, to).to_hash.should == expectation
+      end
+    end
   end
 
   it '#same?' do
