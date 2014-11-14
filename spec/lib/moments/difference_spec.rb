@@ -1,3 +1,4 @@
+require 'spec_helper'
 require_relative '../../../lib/moments/difference'
 
 describe Moments::Difference do
