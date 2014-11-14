@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/excpt/moments.svg?branch=master)](https://travis-ci.org/excpt/moments)
 [![Code Climate](https://codeclimate.com/github/excpt/moments.png)](https://codeclimate.com/github/excpt/moments)
+[![Dependency Status](https://gemnasium.com/excpt/moments.svg)](https://gemnasium.com/excpt/moments)
 
 Handles time differences and calculations.
 
