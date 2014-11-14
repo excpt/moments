@@ -1,7 +1,7 @@
 language: ruby
 script: "bundle exec rspec"
 rvm:
-  - 2.1.0
+  - 2.1.5
   - jruby-19mode
   - ruby-head
   - jruby-head
