@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="468dfd0b-b419-46f3-8ccc-22fd438ee2e8" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.travis.yml" afterPath="$PROJECT_DIR$/.travis.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/moments/difference.rb" afterPath="$PROJECT_DIR$/lib/moments/difference.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spec/lib/moments/difference_spec.rb" afterPath="$PROJECT_DIR$/spec/lib/moments/difference_spec.rb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/moments.gemspec" afterPath="$PROJECT_DIR$/moments.gemspec" />
-    </list>
+    <list default="true" id="468dfd0b-b419-46f3-8ccc-22fd438ee2e8" name="Default" comment="" />
     <ignored path="moments.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path="$PROJECT_DIR$/out/" />
