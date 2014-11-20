@@ -4,14 +4,14 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'moments/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "moments"
-  spec.version       = Moments.gem_version
-  spec.authors       = ["Tim Rudat"]
-  spec.email         = ["timrudat@gmail.com"]
-  spec.summary       = %q{Handles time differences and calculations.}
-  spec.description   = %q{}
-  spec.homepage      = "https://github.com/excpt/moments"
-  spec.license       = "MIT"
+  spec.name        = "moments"
+  spec.version     = Moments.gem_version
+  spec.authors     = ["Tim Rudat"]
+  spec.email       = ["timrudat@gmail.com"]
+  spec.summary     = %q{Handles time differences.}
+  spec.description = %q{}
+  spec.homepage    = "https://github.com/excpt/moments"
+  spec.license     = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }

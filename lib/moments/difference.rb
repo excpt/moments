@@ -4,10 +4,10 @@ module Moments
       @from = from
       @to   = to
 
-      if past?
-        message = "Start date (#{from}) must be less or equal than the end date (#{@to})."
-        raise ArgumentError.new(message)
-      end
+#      if past?
+#        message = "Start date (#{from}) must be less or equal than the end date (#{@to})."
+#        raise ArgumentError.new(message)
+#      end
 
       precise_difference
     end
@@ -30,12 +30,12 @@ module Moments
 
     def precise_difference
       @diff = {
-        seconds: @to.sec - @from.sec,
-        minutes: @to.min - @from.min,
-        hours: @to.hour - @from.hour,
-        days: @to.day - @from.day,
-        months: @to.month - @from.month,
-        years: @to.year - @from.year,
+          seconds: @to.sec - @from.sec,
+          minutes: @to.min - @from.min,
+          hours:   @to.hour - @from.hour,
+          days:    @to.day - @from.day,
+          months:  @to.month - @from.month,
+          years:   @to.year - @from.year,
       }
 
       calculate :seconds, :minutes
@@ -49,10 +49,10 @@ module Moments
 
     private :precise_difference
 
-    def calculate(attr, subtr, increment = 60)
-      if @diff[attr] < 0
-        @diff[attr] += increment
-        @diff[subtr] -= 1
+    def calculate(attribute, difference, stepping = 60)
+      if @diff[attribute] < 0
+        @diff[attribute]  += stepping
+        @diff[difference] -= 1
       end
     end
 
@@ -61,8 +61,8 @@ module Moments
     def calculate_days
       if @diff[:days] < 0
         previous_month_days = (Time.new(@to.year, @to.month, 1) - 1).day
-        @diff[:days] = precise_previous_month_days(@diff[:days], previous_month_days, @from.day)
-        @diff[:months] -= 1
+        @diff[:days]        = precise_previous_month_days(@diff[:days], previous_month_days, @from.day)
+        @diff[:months]      -= 1
       end
     end
 
