@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="IdProvider" IDEtalkID="BD9D5A99B88313A63FE437756DF78F1A" />
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_4" assert-keyword="true" jdk-15="false" project-jdk-name="rbenv: 2.1.4" project-jdk-type="RUBY_SDK">
-    <output url="file://$PROJECT_DIR$/out" />
-  </component>
-</project>
