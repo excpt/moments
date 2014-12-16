@@ -4,11 +4,6 @@ module Moments
       @from = from
       @to   = to
 
-#      if past?
-#        message = "Start date (#{from}) must be less or equal than the end date (#{@to})."
-#        raise ArgumentError.new(message)
-#      end
-
       precise_difference
     end
 
@@ -29,13 +24,21 @@ module Moments
     end
 
     def precise_difference
+      to   = @to
+      from = @from
+
+      if to > from
+        to   = @from
+        from = @to
+      end
+
       @diff = {
-          seconds: @to.sec - @from.sec,
-          minutes: @to.min - @from.min,
-          hours:   @to.hour - @from.hour,
-          days:    @to.day - @from.day,
-          months:  @to.month - @from.month,
-          years:   @to.year - @from.year,
+          seconds: to.sec - from.sec,
+          minutes: to.min - from.min,
+          hours:   to.hour - from.hour,
+          days:    to.day - from.day,
+          months:  to.month - from.month,
+          years:   to.year - from.year,
       }
 
       calculate :seconds, :minutes

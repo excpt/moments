@@ -18,11 +18,5 @@ describe Moments do
 
       Moments.difference(from, to).should be_a Moments::Difference
     end
-
-    it '#difference should raise an error if :from is greater than :to' do
-      expect do
-        Moments.difference(to, from)
-      end.to raise_error
-    end
   end
 end
