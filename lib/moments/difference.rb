@@ -27,7 +27,7 @@ module Moments
       to   = @to
       from = @from
 
-      if to > from
+      if from > to
         to   = @from
         from = @to
       end
