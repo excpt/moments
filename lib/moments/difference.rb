@@ -1,5 +1,11 @@
 module Moments
+  # Calculates differences between two given Time instances.
   class Difference
+    # == Parameters:
+    # from::
+    #   A instance of Time
+    # to::
+    #   A instance of Time
     def initialize(from, to)
       @from = from
       @to   = to
