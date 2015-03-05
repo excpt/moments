@@ -13,6 +13,7 @@ module Moments
     # alpha, beta, etc. tag
     PRE   = 'alpha'
 
+    # Build version string
     STRING = [MAJOR, MINOR, TINY, PRE].compact.join('.')
   end
 end
