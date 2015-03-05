@@ -4,9 +4,13 @@ module Moments
   end
 
   module VERSION
+    # major version
     MAJOR = 0
+    # minor version
     MINOR = 0
+    # tiny version
     TINY  = 2
+    # alpha, beta, etc. tag
     PRE   = 'alpha'
 
     STRING = [MAJOR, MINOR, TINY, PRE].compact.join('.')
