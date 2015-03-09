@@ -34,7 +34,7 @@ describe Moments::Difference do
 
         expectation = { years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 }
 
-        Moments::Difference.new(from, to).to_hash.should == expectation
+        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
     end
 
@@ -47,8 +47,8 @@ describe Moments::Difference do
           expectation = { years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 1 }
 
           diff = Moments::Difference.new(to, from)
-          diff.to_hash.should == expectation
-          diff.past?.should == true
+          diff.to_hash.should eq expectation
+          diff.past?.should eq true
         end
 
         it '2013-02-01 00:00:00, 2013-01-31 23:59:59' do
@@ -58,8 +58,8 @@ describe Moments::Difference do
           expectation = { years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 1 }
 
           diff = Moments::Difference.new(to, from)
-          diff.to_hash.should == expectation
-          diff.past?.should == true
+          diff.to_hash.should eq expectation
+          diff.past?.should eq true
         end
       end
 
@@ -71,8 +71,8 @@ describe Moments::Difference do
           expectation = { years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 1 }
 
           diff = Moments::Difference.new(from, to)
-          diff.to_hash.should == expectation
-          diff.future?.should == true
+          diff.to_hash.should eq expectation
+          diff.future?.should eq true
         end
 
         it '2013-01-31 23:59:59, 2013-02-01 00:00:00' do
@@ -81,7 +81,7 @@ describe Moments::Difference do
 
           expectation = { years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 1 }
 
-          Moments::Difference.new(from, to).to_hash.should == expectation
+          Moments::Difference.new(from, to).to_hash.should eq expectation
         end
       end
     end
@@ -93,7 +93,7 @@ describe Moments::Difference do
 
         expectation = { years: 0, months: 0, days: 0, hours: 0, minutes: 1, seconds: 1 }
 
-        Moments::Difference.new(from, to).to_hash.should == expectation
+        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
 
       it '2013-01-31 23:59:59, 2013-02-01 00:01:00' do
@@ -102,7 +102,7 @@ describe Moments::Difference do
 
         expectation = { years: 0, months: 0, days: 0, hours: 0, minutes: 1, seconds: 1 }
 
-        Moments::Difference.new(from, to).to_hash.should == expectation
+        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
     end
 
@@ -113,7 +113,7 @@ describe Moments::Difference do
 
         expectation = { years: 0, months: 0, days: 0, hours: 1, minutes: 1, seconds: 1 }
 
-        Moments::Difference.new(from, to).to_hash.should == expectation
+        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
 
       it '2013-01-31 23:59:59, 2013-02-01 01:01:00' do
@@ -122,7 +122,7 @@ describe Moments::Difference do
 
         expectation = { years: 0, months: 0, days: 0, hours: 1, minutes: 1, seconds: 1 }
 
-        Moments::Difference.new(from, to).to_hash.should == expectation
+        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
     end
 
@@ -133,7 +133,7 @@ describe Moments::Difference do
 
         expectation = { years: 0, months: 0, days: 1, hours: 0, minutes: 0, seconds: 0 }
 
-        Moments::Difference.new(from, to).to_hash.should == expectation
+        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
 
       it '2013-01-31, 2013-02-01' do
@@ -142,7 +142,7 @@ describe Moments::Difference do
 
         expectation = { years: 0, months: 0, days: 1, hours: 0, minutes: 0, seconds: 0 }
 
-        Moments::Difference.new(from, to).to_hash.should == expectation
+        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
     end
 
@@ -153,7 +153,7 @@ describe Moments::Difference do
 
         expectation = { years: 0, months: 1, days: 1, hours: 0, minutes: 0, seconds: 0 }
 
-        Moments::Difference.new(from, to).to_hash.should == expectation
+        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
 
       it '2013-01-31, 2013-03-01' do
@@ -162,7 +162,7 @@ describe Moments::Difference do
 
         expectation = { years: 0, months: 1, days: 1, hours: 0, minutes: 0, seconds: 0 }
 
-        Moments::Difference.new(from, to).to_hash.should == expectation
+        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
     end
 
@@ -173,7 +173,7 @@ describe Moments::Difference do
 
         expectation = { years: 1, months: 1, days: 1, hours: 0, minutes: 0, seconds: 0 }
 
-        Moments::Difference.new(from, to).to_hash.should == expectation
+        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
 
       it '2013-01-31, 2014-03-01' do
@@ -182,7 +182,7 @@ describe Moments::Difference do
 
         expectation = { years: 1, months: 1, days: 1, hours: 0, minutes: 0, seconds: 0 }
 
-        Moments::Difference.new(from, to).to_hash.should == expectation
+        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
     end
 
@@ -193,7 +193,7 @@ describe Moments::Difference do
 
         expectation = { years: 0, months: 0, days: 2, hours: 0, minutes: 0, seconds: 0 }
 
-        Moments::Difference.new(from, to).to_hash.should == expectation
+        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
 
       it '2008-02-27, 2008-03-01' do
@@ -202,7 +202,7 @@ describe Moments::Difference do
 
         expectation = { years: 0, months: 0, days: 3, hours: 0, minutes: 0, seconds: 0 }
 
-        Moments::Difference.new(from, to).to_hash.should == expectation
+        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
     end
   end
@@ -210,14 +210,14 @@ describe Moments::Difference do
   it '#same?' do
     moments = Moments::Difference.new(from, from)
 
-    moments.same?.should == true
-    moments.past?.should == false
+    moments.same?.should eq true
+    moments.past?.should eq false
   end
 
   it '#future?' do
     moments = Moments::Difference.new(from, to)
 
-    moments.future?.should == true
-    moments.past?.should == false
+    moments.future?.should eq true
+    moments.past?.should eq false
   end
 end
