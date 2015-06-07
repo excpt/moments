@@ -1,3 +1,6 @@
+# encoding: utf-8
+
+# Moments difference calc class
 module Moments
   # Calculates differences between two given Time instances.
   class Difference
@@ -39,12 +42,12 @@ module Moments
       end
 
       @diff = {
-          seconds: to.sec - from.sec,
-          minutes: to.min - from.min,
-          hours:   to.hour - from.hour,
-          days:    to.day - from.day,
-          months:  to.month - from.month,
-          years:   to.year - from.year,
+        seconds: to.sec - from.sec,
+        minutes: to.min - from.min,
+        hours:   to.hour - from.hour,
+        days:    to.day - from.day,
+        months:  to.month - from.month,
+        years:   to.year - from.year
       }
 
       calculate :seconds, :minutes
@@ -59,20 +62,20 @@ module Moments
     private :precise_difference
 
     def calculate(attribute, difference, stepping = 60)
-      if @diff[attribute] < 0
-        @diff[attribute]  += stepping
-        @diff[difference] -= 1
-      end
+      return if @diff[attribute] >= 0
+
+      @diff[attribute] += stepping
+      @diff[difference] -= 1
     end
 
     private :calculate
 
     def calculate_days
-      if @diff[:days] < 0
-        previous_month_days = (Time.new(@to.year, @to.month, 1) - 1).day
-        @diff[:days]        = precise_previous_month_days(@diff[:days], previous_month_days, @from.day)
-        @diff[:months]      -= 1
-      end
+      return if @diff[:days] >= 0
+
+      previous_month_days = (Time.new(@to.year, @to.month, 1) - 1).day
+      @diff[:days]        = precise_previous_month_days(@diff[:days], previous_month_days, @from.day)
+      @diff[:months] -= 1
     end
 
     private :calculate_days

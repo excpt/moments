@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version     = Moments.gem_version
   spec.authors     = ['Tim Rudat']
   spec.email       = ['timrudat@gmail.com']
-  spec.summary     = %q{Handles time differences.}
-  spec.description = %q{}
+  spec.summary     = 'Handles time differences.'
+  spec.description = ''
   spec.homepage    = 'https://github.com/excpt/moments'
   spec.license     = 'MIT'
 
