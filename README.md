@@ -1,6 +1,6 @@
 # Moments [![Gem Version](https://badge.fury.io/rb/moments.svg)](http://badge.fury.io/rb/moments)
 
-[ ![Codeship Status for excpt/moments](https://codeship.com/projects/54ff9970-675f-0132-a1ba-760b27c1e7ed/status?branch=master)](https://codeship.com/projects/53081)
+[![Codeship Status for excpt/moments](https://codeship.com/projects/54ff9970-675f-0132-a1ba-760b27c1e7ed/status?branch=master)](https://codeship.com/projects/53081)
 [![Build Status](https://travis-ci.org/excpt/moments.svg?branch=master)](https://travis-ci.org/excpt/moments)
 [![Code Climate](https://codeclimate.com/github/excpt/moments.png)](https://codeclimate.com/github/excpt/moments)
 [![Test Coverage](https://codeclimate.com/github/excpt/moments/badges/coverage.svg)](https://codeclimate.com/github/excpt/moments)
