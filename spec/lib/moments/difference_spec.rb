@@ -188,7 +188,7 @@ describe Moments::Difference do
     end
 
     context 'leap year' do
-      it '2008-02-27, 2008-02-029' do
+      it '2008-02-27, 2008-02-29' do
         from = Time.new 2008, 2, 27
         to   = Time.new 2008, 2, 29
 
