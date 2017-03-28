@@ -9,6 +9,7 @@ module Moments
     def initialize(from, to)
       @from = from
       @to   = to
+      @diff = {}
 
       precise_difference
     end
@@ -30,13 +31,7 @@ module Moments
     end
 
     def precise_difference
-      to   = @to
-      from = @from
-
-      if from > to
-        to   = @from
-        from = @to
-      end
+      from, to = ordered_time
 
       @diff = {
         seconds: to.sec - from.sec,
@@ -57,6 +52,20 @@ module Moments
     end
 
     private :precise_difference
+
+    def ordered_time
+      to   = @to
+      from = @from
+
+      if from > to
+        to   = @from
+        from = @to
+      end
+
+      [from, to]
+    end
+
+    private :ordered_time
 
     def calculate(attribute, difference, stepping = 60)
       return if @diff[attribute] >= 0
@@ -79,12 +88,10 @@ module Moments
 
     def precise_previous_month_days(days, previous, from)
       if previous < from
-        days = previous + days + (from - previous)
+        previous + days + (from - previous)
       else
-        days = previous + days
+        previous + days
       end
-
-      days
     end
 
     private :precise_previous_month_days
