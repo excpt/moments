@@ -1,6 +1,3 @@
-# encoding: utf-8
-
-# Moments difference calc class
 module Moments
   # Calculates differences between two given Time instances.
   class Difference
