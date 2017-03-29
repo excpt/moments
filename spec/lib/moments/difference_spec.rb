@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative '../../../lib/moments/difference'
+require 'moments/difference'
 
 describe Moments::Difference do
   let(:from) do
@@ -32,7 +32,14 @@ describe Moments::Difference do
         from = Time.new 2013, 1, 1
         to   = from
 
-        expectation = { years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 0 }
+        expectation = {
+          years: 0,
+          months: 0,
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        }
 
         Moments::Difference.new(from, to).to_hash.should eq expectation
       end
@@ -44,7 +51,14 @@ describe Moments::Difference do
           from = Time.new 2013, 1, 1, 0, 0, 0
           to   = Time.new 2013, 1, 1, 0, 0, 1
 
-          expectation = { years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 1 }
+          expectation = {
+            years: 0,
+            months: 0,
+            days: 0,
+            hours: 0,
+            minutes: 0,
+            seconds: 1
+          }
 
           diff = Moments::Difference.new(to, from)
           diff.to_hash.should eq expectation
@@ -55,7 +69,14 @@ describe Moments::Difference do
           from = Time.new 2013, 1, 31, 23, 59, 59
           to   = Time.new 2013, 2, 1, 0, 0, 0
 
-          expectation = { years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 1 }
+          expectation = {
+            years: 0,
+            months: 0,
+            days: 0,
+            hours: 0,
+            minutes: 0,
+            seconds: 1
+          }
 
           diff = Moments::Difference.new(to, from)
           diff.to_hash.should eq expectation
@@ -68,7 +89,14 @@ describe Moments::Difference do
           from = Time.new 2013, 1, 1, 0, 0, 0
           to   = Time.new 2013, 1, 1, 0, 0, 1
 
-          expectation = { years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 1 }
+          expectation = {
+            years: 0,
+            months: 0,
+            days: 0,
+            hours: 0,
+            minutes: 0,
+            seconds: 1
+          }
 
           diff = Moments::Difference.new(from, to)
           diff.to_hash.should eq expectation
@@ -79,7 +107,14 @@ describe Moments::Difference do
           from = Time.new 2013, 1, 31, 23, 59, 59
           to   = Time.new 2013, 2, 1, 0, 0, 0
 
-          expectation = { years: 0, months: 0, days: 0, hours: 0, minutes: 0, seconds: 1 }
+          expectation = {
+            years: 0,
+            months: 0,
+            days: 0,
+            hours: 0,
+            minutes: 0,
+            seconds: 1
+          }
 
           Moments::Difference.new(from, to).to_hash.should eq expectation
         end
@@ -91,7 +126,14 @@ describe Moments::Difference do
         from = Time.new 2013, 1, 1, 0, 0, 0
         to   = Time.new 2013, 1, 1, 0, 1, 1
 
-        expectation = { years: 0, months: 0, days: 0, hours: 0, minutes: 1, seconds: 1 }
+        expectation = {
+          years: 0,
+          months: 0,
+          days: 0,
+          hours: 0,
+          minutes: 1,
+          seconds: 1
+        }
 
         Moments::Difference.new(from, to).to_hash.should eq expectation
       end
@@ -100,7 +142,14 @@ describe Moments::Difference do
         from = Time.new 2013, 1, 31, 23, 59, 59
         to   = Time.new 2013, 2, 1, 0, 1, 0
 
-        expectation = { years: 0, months: 0, days: 0, hours: 0, minutes: 1, seconds: 1 }
+        expectation = {
+          years: 0,
+          months: 0,
+          days: 0,
+          hours: 0,
+          minutes: 1,
+          seconds: 1
+        }
 
         Moments::Difference.new(from, to).to_hash.should eq expectation
       end
@@ -111,7 +160,14 @@ describe Moments::Difference do
         from = Time.new 2013, 1, 1, 0, 0, 0
         to   = Time.new 2013, 1, 1, 1, 1, 1
 
-        expectation = { years: 0, months: 0, days: 0, hours: 1, minutes: 1, seconds: 1 }
+        expectation = {
+          years: 0,
+          months: 0,
+          days: 0,
+          hours: 1,
+          minutes: 1,
+          seconds: 1
+        }
 
         Moments::Difference.new(from, to).to_hash.should eq expectation
       end
@@ -120,7 +176,14 @@ describe Moments::Difference do
         from = Time.new 2013, 1, 31, 23, 59, 59
         to   = Time.new 2013, 2, 1, 1, 1, 0
 
-        expectation = { years: 0, months: 0, days: 0, hours: 1, minutes: 1, seconds: 1 }
+        expectation = {
+          years: 0,
+          months: 0,
+          days: 0,
+          hours: 1,
+          minutes: 1,
+          seconds: 1
+        }
 
         Moments::Difference.new(from, to).to_hash.should eq expectation
       end
@@ -131,7 +194,14 @@ describe Moments::Difference do
         from = Time.new 2013, 1, 1
         to   = Time.new 2013, 1, 2
 
-        expectation = { years: 0, months: 0, days: 1, hours: 0, minutes: 0, seconds: 0 }
+        expectation = {
+          years: 0,
+          months: 0,
+          days: 1,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        }
 
         Moments::Difference.new(from, to).to_hash.should eq expectation
       end
@@ -140,7 +210,14 @@ describe Moments::Difference do
         from = Time.new 2013, 1, 31
         to   = Time.new 2013, 2, 1
 
-        expectation = { years: 0, months: 0, days: 1, hours: 0, minutes: 0, seconds: 0 }
+        expectation = {
+          years: 0,
+          months: 0,
+          days: 1,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        }
 
         Moments::Difference.new(from, to).to_hash.should eq expectation
       end
@@ -151,7 +228,14 @@ describe Moments::Difference do
         from = Time.new 2013, 1, 1
         to   = Time.new 2013, 2, 2
 
-        expectation = { years: 0, months: 1, days: 1, hours: 0, minutes: 0, seconds: 0 }
+        expectation = {
+          years: 0,
+          months: 1,
+          days: 1,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        }
 
         Moments::Difference.new(from, to).to_hash.should eq expectation
       end
@@ -160,7 +244,14 @@ describe Moments::Difference do
         from = Time.new 2013, 1, 31
         to   = Time.new 2013, 3, 1
 
-        expectation = { years: 0, months: 1, days: 1, hours: 0, minutes: 0, seconds: 0 }
+        expectation = {
+          years: 0,
+          months: 1,
+          days: 1,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        }
 
         Moments::Difference.new(from, to).to_hash.should eq expectation
       end
@@ -171,7 +262,14 @@ describe Moments::Difference do
         from = Time.new 2013, 1, 1
         to   = Time.new 2014, 2, 2
 
-        expectation = { years: 1, months: 1, days: 1, hours: 0, minutes: 0, seconds: 0 }
+        expectation = {
+          years: 1,
+          months: 1,
+          days: 1,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        }
 
         Moments::Difference.new(from, to).to_hash.should eq expectation
       end
@@ -180,7 +278,14 @@ describe Moments::Difference do
         from = Time.new 2013, 1, 31
         to   = Time.new 2014, 3, 1
 
-        expectation = { years: 1, months: 1, days: 1, hours: 0, minutes: 0, seconds: 0 }
+        expectation = {
+          years: 1,
+          months: 1,
+          days: 1,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        }
 
         Moments::Difference.new(from, to).to_hash.should eq expectation
       end
@@ -188,10 +293,17 @@ describe Moments::Difference do
 
     context 'leap year' do
       it '2008-02-27, 2008-02-29' do
-        from = Time.new 2008, 2, 27
-        to   = Time.new 2008, 2, 29
+        from = Time.new 2008, 2, 28
+        to   = Time.new 2008, 3, 1
 
-        expectation = { years: 0, months: 0, days: 2, hours: 0, minutes: 0, seconds: 0 }
+        expectation = {
+          years: 0,
+          months: 0,
+          days: 2,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        }
 
         Moments::Difference.new(from, to).to_hash.should eq expectation
       end
@@ -200,7 +312,14 @@ describe Moments::Difference do
         from = Time.new 2008, 2, 27
         to   = Time.new 2008, 3, 1
 
-        expectation = { years: 0, months: 0, days: 3, hours: 0, minutes: 0, seconds: 0 }
+        expectation = {
+          years: 0,
+          months: 0,
+          days: 3,
+          hours: 0,
+          minutes: 0,
+          seconds: 0
+        }
 
         Moments::Difference.new(from, to).to_hash.should eq expectation
       end
