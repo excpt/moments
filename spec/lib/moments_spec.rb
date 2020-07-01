@@ -1,22 +1,12 @@
-require 'spec_helper'
-require_relative '../../lib/moments.rb'
+# frozen_string_literal: true
 
 describe Moments do
-  context 'calculates the distance between two given times' do
-    let(:from) do
-      Time.new 2012, 1, 1
-    end
+  describe '#difference' do
+    subject { Moments.difference(from, to) }
 
-    let(:to) do
-      Time.new 2013, 1, 1
-    end
+    let(:from) { Time.new 2012, 1, 1 }
+    let(:to)   { Time.new 2013, 1, 1 }
 
-    it '#difference requires a start and end time' do
-      expect do
-        Moments.difference(from, to)
-      end.to_not raise_error
-
-      Moments.difference(from, to).should be_a Moments::Difference
-    end
+    it { is_expected.to be_a Moments::Difference }
   end
 end

@@ -12,15 +12,21 @@ Handles time differences and calculations.
 
 Add this line to your application's Gemfile:
 
-    gem 'moments'
+```ruby
+gem 'moments'
+```
 
 And then execute:
 
-    $ bundle
+```sh
+$ bundle
+```
 
 Or install it yourself as:
 
-    $ gem install moments
+```sh
+$ gem install moments
+```
 
 ## Usage
 
@@ -34,7 +40,7 @@ t2 = Time.new 2020, 1, 1
 diff = Moments.difference t1, t2
 
 puts diff.to_hash
-# Output {:years=>5, :months=>7, :days=>5, :hours=>19, :minutes=>29, :seconds=>6}
+# { years: 5, months: 7, days: 5, hours: 19, minutes: 29, seconds: 6 }
 ```
 
 ## Contributing

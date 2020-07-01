@@ -1,6 +1,19 @@
+# frozen_string_literal: true
+
 module Moments
   # Calculates differences between two given Time instances.
   class Difference
+    PARTS = {
+      years: :year,
+      months: :month,
+      days: :day,
+      hours: :hour,
+      minutes: :min,
+      seconds: :sec
+    }.freeze
+
+    private_constant :PARTS
+
     # == Parameters:
     # from::
     #   A instance of Time
@@ -9,14 +22,7 @@ module Moments
     def initialize(from, to)
       @from = from
       @to   = to
-      @diff = {
-        seconds: 0,
-        minutes: 0,
-        hours: 0,
-        days: 0,
-        months: 0,
-        years: 0
-      }
+      @diff = PARTS.transform_values { 0 }
 
       precise_difference
     end
@@ -37,6 +43,8 @@ module Moments
       @from > @to
     end
 
+    private
+
     def precise_difference
       from, to = ordered_time
       @diff = calculate_diff from, to
@@ -49,32 +57,16 @@ module Moments
 
       @diff
     end
-    private :precise_difference
 
     def calculate_diff(from, to)
-      {
-        seconds: to.sec - from.sec,
-        minutes: to.min - from.min,
-        hours:   to.hour - from.hour,
-        days:    to.day - from.day,
-        months:  to.month - from.month,
-        years:   to.year - from.year
-      }
+      PARTS.transform_values do |method_name|
+        to.public_send(method_name) - from.public_send(method_name)
+      end
     end
-    private :calculate_diff
 
     def ordered_time
-      to   = @to
-      from = @from
-
-      if from > to
-        to   = @from
-        from = @to
-      end
-
-      [from, to]
+      [@from, @to].sort
     end
-    private :ordered_time
 
     def calculate(attribute, difference, stepping = 60)
       return if @diff[attribute] >= 0
@@ -82,7 +74,6 @@ module Moments
       @diff[attribute] += stepping
       @diff[difference] -= 1
     end
-    private :calculate
 
     def calculate_days
       return if @diff[:days] >= 0
@@ -91,7 +82,6 @@ module Moments
       @diff[:days] = precise_previous_month_days(@diff[:days], previous_month_days, @from.day)
       @diff[:months] -= 1
     end
-    private :calculate_days
 
     def precise_previous_month_days(days, previous, from)
       if previous < from
@@ -100,6 +90,5 @@ module Moments
         previous + days
       end
     end
-    private :precise_previous_month_days
   end
 end

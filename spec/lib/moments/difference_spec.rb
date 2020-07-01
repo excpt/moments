@@ -1,38 +1,29 @@
-require 'spec_helper'
-require 'moments/difference'
+# frozen_string_literal: true
 
 describe Moments::Difference do
-  let(:from) do
-    Time.new 2007, 1, 1
-  end
+  let(:from) { Time.new 2007, 1, 1 }
+  let(:to)   { Time.new 2012, 1, 1 }
 
-  let(:to) do
-    Time.new 2012, 1, 1
-  end
-
-  it 'requires from and to times' do
-    expect do
-      Moments::Difference.new
-    end.to raise_error
-
-    expect do
-      Moments::Difference.new from, to
-    end.to_not raise_error
-  end
-
-  it 'raise error if from > to' do
-    expect do
-      Moments::Difference(to, from)
-    end.to raise_error
+  describe '#new' do
+    context 'without arguments' do
+      it { expect { Moments::Difference.new }.to raise_error(ArgumentError) }
+    end
   end
 
   context '#to_hash' do
-    context 'equal dates' do
-      it '2013-01-01, 2013-01-01' do
-        from = Time.new 2013, 1, 1
-        to   = from
+    subject { Moments::Difference.new(from, to).to_hash }
 
-        expectation = {
+    describe 'order of keys' do
+      subject { super().keys }
+
+      it { is_expected.to eq %i[years months days hours minutes seconds] }
+    end
+
+    context 'with equal dates' do
+      let(:to) { from }
+
+      let(:expected_result) do
+        {
           years: 0,
           months: 0,
           days: 0,
@@ -40,263 +31,284 @@ describe Moments::Difference do
           minutes: 0,
           seconds: 0
         }
-
-        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
+
+      it { is_expected.to eq expected_result }
     end
 
-    context 'seconds' do
-      context 'past' do
-        it '2013-01-01 00:00:01, 2013-01-01 00:00:00' do
-          from = Time.new 2013, 1, 1, 0, 0, 0
-          to   = Time.new 2013, 1, 1, 0, 0, 1
+    describe 'seconds' do
+      let(:expected_result) do
+        {
+          years: 0,
+          months: 0,
+          days: 0,
+          hours: 0,
+          minutes: 0,
+          seconds: 1
+        }
+      end
 
-          expectation = {
-            years: 0,
-            months: 0,
-            days: 0,
-            hours: 0,
-            minutes: 0,
-            seconds: 1
-          }
+      context 'when future' do
+        context 'when the same day' do
+          let(:from) { Time.new 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.new 2013, 1, 1, 0, 0, 1 }
 
-          diff = Moments::Difference.new(to, from)
-          diff.to_hash.should eq expectation
-          diff.past?.should eq true
+          it { is_expected.to eq expected_result }
         end
 
-        it '2013-02-01 00:00:00, 2013-01-31 23:59:59' do
-          from = Time.new 2013, 1, 31, 23, 59, 59
-          to   = Time.new 2013, 2, 1, 0, 0, 0
+        context 'when different days' do
+          let(:from) { Time.new 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.new 2013, 2, 1, 0, 0, 0 }
 
-          expectation = {
-            years: 0,
-            months: 0,
-            days: 0,
-            hours: 0,
-            minutes: 0,
-            seconds: 1
-          }
-
-          diff = Moments::Difference.new(to, from)
-          diff.to_hash.should eq expectation
-          diff.past?.should eq true
+          it { is_expected.to eq expected_result }
         end
       end
 
-      context 'future' do
-        it '2013-01-01 00:00:00, 2013-01-01 00:00:01' do
-          from = Time.new 2013, 1, 1, 0, 0, 0
-          to   = Time.new 2013, 1, 1, 0, 0, 1
+      context 'when past' do
+        context 'when the same day' do
+          let(:from) { Time.new 2013, 1, 1, 0, 0, 1 }
+          let(:to)   { Time.new 2013, 1, 1, 0, 0, 0 }
 
-          expectation = {
-            years: 0,
-            months: 0,
-            days: 0,
-            hours: 0,
-            minutes: 0,
-            seconds: 1
-          }
-
-          diff = Moments::Difference.new(from, to)
-          diff.to_hash.should eq expectation
-          diff.future?.should eq true
+          it { is_expected.to eq expected_result }
         end
 
-        it '2013-01-31 23:59:59, 2013-02-01 00:00:00' do
-          from = Time.new 2013, 1, 31, 23, 59, 59
-          to   = Time.new 2013, 2, 1, 0, 0, 0
+        context 'when different days' do
+          let(:from) { Time.new 2013, 2, 1, 0, 0, 0 }
+          let(:to)   { Time.new 2013, 1, 31, 23, 59, 59 }
 
-          expectation = {
-            years: 0,
-            months: 0,
-            days: 0,
-            hours: 0,
-            minutes: 0,
-            seconds: 1
-          }
-
-          Moments::Difference.new(from, to).to_hash.should eq expectation
+          it { is_expected.to eq expected_result }
         end
       end
     end
 
-    context 'minutes' do
-      it '2013-01-01 00:00:00, 2013-01-01 00:01:01' do
-        from = Time.new 2013, 1, 1, 0, 0, 0
-        to   = Time.new 2013, 1, 1, 0, 1, 1
-
-        expectation = {
+    describe 'minutes' do
+      let(:expected_result) do
+        {
           years: 0,
           months: 0,
           days: 0,
           hours: 0,
-          minutes: 1,
+          minutes: 2,
           seconds: 1
         }
-
-        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
 
-      it '2013-01-31 23:59:59, 2013-02-01 00:01:00' do
-        from = Time.new 2013, 1, 31, 23, 59, 59
-        to   = Time.new 2013, 2, 1, 0, 1, 0
+      context 'when future' do
+        context 'when the same day' do
+          let(:from) { Time.new 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.new 2013, 1, 1, 0, 2, 1 }
 
-        expectation = {
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.new 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.new 2013, 2, 1, 0, 2, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+
+      context 'when past' do
+        context 'when the same day' do
+          let(:from) { Time.new 2013, 1, 1, 0, 2, 1 }
+          let(:to)   { Time.new 2013, 1, 1, 0, 0, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.new 2013, 2, 1, 0, 2, 0 }
+          let(:to)   { Time.new 2013, 1, 31, 23, 59, 59 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+    end
+
+    describe 'hours' do
+      let(:expected_result) do
+        {
           years: 0,
           months: 0,
           days: 0,
-          hours: 0,
-          minutes: 1,
+          hours: 3,
+          minutes: 2,
           seconds: 1
         }
+      end
 
-        Moments::Difference.new(from, to).to_hash.should eq expectation
+      context 'when future' do
+        context 'when the same day' do
+          let(:from) { Time.new 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.new 2013, 1, 1, 3, 2, 1 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.new 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.new 2013, 2, 1, 3, 2, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+
+      context 'when past' do
+        context 'when the same day' do
+          let(:from) { Time.new 2013, 1, 1, 3, 2, 1 }
+          let(:to)   { Time.new 2013, 1, 1, 0, 0, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.new 2013, 2, 1, 3, 2, 0 }
+          let(:to)   { Time.new 2013, 1, 31, 23, 59, 59 }
+
+          it { is_expected.to eq expected_result }
+        end
       end
     end
 
-    context 'hours' do
-      it '2013-01-01 00:00:00, 2013-01-01 01:01:01' do
-        from = Time.new 2013, 1, 1, 0, 0, 0
-        to   = Time.new 2013, 1, 1, 1, 1, 1
-
-        expectation = {
+    describe 'days' do
+      let(:expected_result) do
+        {
           years: 0,
           months: 0,
-          days: 0,
-          hours: 1,
-          minutes: 1,
+          days: 4,
+          hours: 3,
+          minutes: 2,
           seconds: 1
         }
-
-        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
 
-      it '2013-01-31 23:59:59, 2013-02-01 01:01:00' do
-        from = Time.new 2013, 1, 31, 23, 59, 59
-        to   = Time.new 2013, 2, 1, 1, 1, 0
+      context 'when future' do
+        context 'when the same day' do
+          let(:from) { Time.new 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.new 2013, 1, 5, 3, 2, 1 }
 
-        expectation = {
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.new 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.new 2013, 2, 5, 3, 2, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+
+      context 'when past' do
+        context 'when the same day' do
+          let(:from) { Time.new 2013, 1, 5, 3, 2, 1 }
+          let(:to)   { Time.new 2013, 1, 1, 0, 0, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.new 2013, 2, 5, 3, 2, 0 }
+          let(:to)   { Time.new 2013, 1, 31, 23, 59, 59 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+    end
+
+    describe 'months' do
+      let(:expected_result) do
+        {
           years: 0,
-          months: 0,
-          days: 0,
-          hours: 1,
-          minutes: 1,
+          months: 5,
+          days: 4,
+          hours: 3,
+          minutes: 2,
           seconds: 1
         }
+      end
 
-        Moments::Difference.new(from, to).to_hash.should eq expectation
+      context 'when future' do
+        context 'when the same day' do
+          let(:from) { Time.new 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.new 2013, 6, 5, 3, 2, 1 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.new 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.new 2013, 7, 5, 3, 2, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+
+      context 'when past' do
+        context 'when the same day' do
+          let(:from) { Time.new 2013, 6, 5, 3, 2, 1 }
+          let(:to)   { Time.new 2013, 1, 1, 0, 0, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.new 2013, 7, 5, 3, 2, 0 }
+          let(:to)   { Time.new 2013, 1, 31, 23, 59, 59 }
+
+          it { is_expected.to eq expected_result }
+        end
       end
     end
 
-    context 'days' do
-      it '2013-01-01, 2013-01-02' do
-        from = Time.new 2013, 1, 1
-        to   = Time.new 2013, 1, 2
-
-        expectation = {
-          years: 0,
-          months: 0,
-          days: 1,
-          hours: 0,
-          minutes: 0,
-          seconds: 0
+    describe 'years' do
+      let(:expected_result) do
+        {
+          years: 6,
+          months: 5,
+          days: 4,
+          hours: 3,
+          minutes: 2,
+          seconds: 1
         }
-
-        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
 
-      it '2013-01-31, 2013-02-01' do
-        from = Time.new 2013, 1, 31
-        to   = Time.new 2013, 2, 1
+      context 'when future' do
+        context 'when the same day' do
+          let(:from) { Time.new 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.new 2019, 6, 5, 3, 2, 1 }
 
-        expectation = {
-          years: 0,
-          months: 0,
-          days: 1,
-          hours: 0,
-          minutes: 0,
-          seconds: 0
-        }
+          it { is_expected.to eq expected_result }
+        end
 
-        Moments::Difference.new(from, to).to_hash.should eq expectation
-      end
-    end
+        context 'when different days' do
+          let(:from) { Time.new 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.new 2019, 7, 5, 3, 2, 0 }
 
-    context 'months' do
-      it '2013-01-01, 2013-02-01' do
-        from = Time.new 2013, 1, 1
-        to   = Time.new 2013, 2, 2
-
-        expectation = {
-          years: 0,
-          months: 1,
-          days: 1,
-          hours: 0,
-          minutes: 0,
-          seconds: 0
-        }
-
-        Moments::Difference.new(from, to).to_hash.should eq expectation
+          it { is_expected.to eq expected_result }
+        end
       end
 
-      it '2013-01-31, 2013-03-01' do
-        from = Time.new 2013, 1, 31
-        to   = Time.new 2013, 3, 1
+      context 'when past' do
+        context 'when the same day' do
+          let(:from) { Time.new 2019, 6, 5, 3, 2, 1 }
+          let(:to)   { Time.new 2013, 1, 1, 0, 0, 0 }
 
-        expectation = {
-          years: 0,
-          months: 1,
-          days: 1,
-          hours: 0,
-          minutes: 0,
-          seconds: 0
-        }
+          it { is_expected.to eq expected_result }
+        end
 
-        Moments::Difference.new(from, to).to_hash.should eq expectation
-      end
-    end
+        context 'when different days' do
+          let(:from) { Time.new 2019, 7, 5, 3, 2, 0 }
+          let(:to)   { Time.new 2013, 1, 31, 23, 59, 59 }
 
-    context 'years' do
-      it '2013-01-01, 2014-01-01' do
-        from = Time.new 2013, 1, 1
-        to   = Time.new 2014, 2, 2
-
-        expectation = {
-          years: 1,
-          months: 1,
-          days: 1,
-          hours: 0,
-          minutes: 0,
-          seconds: 0
-        }
-
-        Moments::Difference.new(from, to).to_hash.should eq expectation
-      end
-
-      it '2013-01-31, 2014-03-01' do
-        from = Time.new 2013, 1, 31
-        to   = Time.new 2014, 3, 1
-
-        expectation = {
-          years: 1,
-          months: 1,
-          days: 1,
-          hours: 0,
-          minutes: 0,
-          seconds: 0
-        }
-
-        Moments::Difference.new(from, to).to_hash.should eq expectation
+          it { is_expected.to eq expected_result }
+        end
       end
     end
 
     context 'leap year' do
-      it '2008-02-27, 2008-02-29' do
-        from = Time.new 2008, 2, 28
-        to   = Time.new 2008, 3, 1
-
-        expectation = {
+      let(:expected_result) do
+        {
           years: 0,
           months: 0,
           days: 2,
@@ -304,39 +316,84 @@ describe Moments::Difference do
           minutes: 0,
           seconds: 0
         }
-
-        Moments::Difference.new(from, to).to_hash.should eq expectation
       end
 
-      it '2008-02-27, 2008-03-01' do
-        from = Time.new 2008, 2, 27
-        to   = Time.new 2008, 3, 1
+      let(:from) { Time.new 2008, 2, 28 }
+      let(:to)   { Time.new 2008, 3, 1 }
 
-        expectation = {
-          years: 0,
-          months: 0,
-          days: 3,
-          hours: 0,
-          minutes: 0,
-          seconds: 0
-        }
-
-        Moments::Difference.new(from, to).to_hash.should eq expectation
-      end
+      it { is_expected.to eq expected_result }
     end
   end
 
-  it '#same?' do
-    moments = Moments::Difference.new(from, from)
+  describe '#same?' do
+    subject { Moments::Difference.new(from, to).same? }
 
-    moments.same?.should eq true
-    moments.past?.should eq false
+    context 'with the same dates' do
+      let(:to) { from }
+
+      it { is_expected.to eq true }
+    end
+
+    context 'when `from` is earlier than `to`' do
+      let(:from) { Time.new 2020, 1, 1 }
+      let(:to)   { Time.new 2020, 1, 2 }
+
+      it { is_expected.to eq false }
+    end
+
+    context 'when `to` is earlier than `from`' do
+      let(:from) { Time.new 2020, 1, 2 }
+      let(:to)   { Time.new 2020, 1, 1 }
+
+      it { is_expected.to eq false }
+    end
   end
 
-  it '#future?' do
-    moments = Moments::Difference.new(from, to)
+  describe '#future?' do
+    subject { Moments::Difference.new(from, to).future? }
 
-    moments.future?.should eq true
-    moments.past?.should eq false
+    context 'with the same dates' do
+      let(:to) { from }
+
+      it { is_expected.to eq false }
+    end
+
+    context 'when `from` is earlier than `to`' do
+      let(:from) { Time.new 2020, 1, 1 }
+      let(:to)   { Time.new 2020, 1, 2 }
+
+      it { is_expected.to eq true }
+    end
+
+    context 'when `to` is earlier than `from`' do
+      let(:from) { Time.new 2020, 1, 2 }
+      let(:to)   { Time.new 2020, 1, 1 }
+
+      it { is_expected.to eq false }
+    end
+  end
+
+  describe '#past?' do
+    subject { Moments::Difference.new(from, to).past? }
+
+    context 'with the same dates' do
+      let(:to) { from }
+
+      it { is_expected.to eq false }
+    end
+
+    context 'when `from` is earlier than `to`' do
+      let(:from) { Time.new 2020, 1, 1 }
+      let(:to)   { Time.new 2020, 1, 2 }
+
+      it { is_expected.to eq false }
+    end
+
+    context 'when `to` is earlier than `from`' do
+      let(:from) { Time.new 2020, 1, 2 }
+      let(:to)   { Time.new 2020, 1, 1 }
+
+      it { is_expected.to eq true }
+    end
   end
 end
