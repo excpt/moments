@@ -1,3 +1,9 @@
+Layout/LineLength:
+  Max: 100
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
 Layout/SpaceAroundMethodCallOperator:
@@ -29,6 +35,8 @@ Style/RedundantRegexpEscape:
 Style/SlicingWithRange:
   Enabled: true
 
+Metrics/ParameterLists:
+  CountKeywordArgs: false
 Metrics/BlockLength:
   Exclude:
     - spec/**/*

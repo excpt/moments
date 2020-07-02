@@ -33,14 +33,17 @@ $ gem install moments
 ```ruby
 require 'moments'
 
-t1 = Time.now
-t2 = Time.new 2020, 1, 1
+t1 = Time.new 2015, 1, 1, 0, 0, 0
+t2 = Time.now # 2020, 8, 6, 19, 29, 6
 
-# Important: For now t1 must be equal or less than t2
 diff = Moments.difference t1, t2
 
 puts diff.to_hash
 # { years: 5, months: 7, days: 5, hours: 19, minutes: 29, seconds: 6 }
+
+puts diff.in_months
+# 67 (5 * 12 + 7)
+# there are also methods for each component
 ```
 
 ## Contributing

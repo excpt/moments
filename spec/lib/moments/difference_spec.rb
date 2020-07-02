@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 describe Moments::Difference do
-  let(:from) { Time.new 2007, 1, 1 }
-  let(:to)   { Time.new 2012, 1, 1 }
+  let(:from) { Time.utc 2007, 1, 1 }
+  let(:to)   { Time.utc 2012, 1, 1 }
 
   describe '#new' do
     context 'without arguments' do
@@ -49,32 +49,32 @@ describe Moments::Difference do
       end
 
       context 'when future' do
-        context 'when the same day' do
-          let(:from) { Time.new 2013, 1, 1, 0, 0, 0 }
-          let(:to)   { Time.new 2013, 1, 1, 0, 0, 1 }
+        context 'when the same minute' do
+          let(:from) { Time.utc 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 0, 1 }
 
           it { is_expected.to eq expected_result }
         end
 
-        context 'when different days' do
-          let(:from) { Time.new 2013, 1, 31, 23, 59, 59 }
-          let(:to)   { Time.new 2013, 2, 1, 0, 0, 0 }
+        context 'when different minutes' do
+          let(:from) { Time.utc 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.utc 2013, 2, 1, 0, 0, 0 }
 
           it { is_expected.to eq expected_result }
         end
       end
 
       context 'when past' do
-        context 'when the same day' do
-          let(:from) { Time.new 2013, 1, 1, 0, 0, 1 }
-          let(:to)   { Time.new 2013, 1, 1, 0, 0, 0 }
+        context 'when the same minute' do
+          let(:from) { Time.utc 2013, 1, 1, 0, 0, 1 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 0, 0 }
 
           it { is_expected.to eq expected_result }
         end
 
-        context 'when different days' do
-          let(:from) { Time.new 2013, 2, 1, 0, 0, 0 }
-          let(:to)   { Time.new 2013, 1, 31, 23, 59, 59 }
+        context 'when different minutes' do
+          let(:from) { Time.utc 2013, 2, 1, 0, 0, 0 }
+          let(:to)   { Time.utc 2013, 1, 31, 23, 59, 59 }
 
           it { is_expected.to eq expected_result }
         end
@@ -94,32 +94,32 @@ describe Moments::Difference do
       end
 
       context 'when future' do
-        context 'when the same day' do
-          let(:from) { Time.new 2013, 1, 1, 0, 0, 0 }
-          let(:to)   { Time.new 2013, 1, 1, 0, 2, 1 }
+        context 'when the same hour' do
+          let(:from) { Time.utc 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 2, 1 }
 
           it { is_expected.to eq expected_result }
         end
 
-        context 'when different days' do
-          let(:from) { Time.new 2013, 1, 31, 23, 59, 59 }
-          let(:to)   { Time.new 2013, 2, 1, 0, 2, 0 }
+        context 'when different hours' do
+          let(:from) { Time.utc 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.utc 2013, 2, 1, 0, 2, 0 }
 
           it { is_expected.to eq expected_result }
         end
       end
 
       context 'when past' do
-        context 'when the same day' do
-          let(:from) { Time.new 2013, 1, 1, 0, 2, 1 }
-          let(:to)   { Time.new 2013, 1, 1, 0, 0, 0 }
+        context 'when the same hour' do
+          let(:from) { Time.utc 2013, 1, 1, 0, 2, 1 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 0, 0 }
 
           it { is_expected.to eq expected_result }
         end
 
-        context 'when different days' do
-          let(:from) { Time.new 2013, 2, 1, 0, 2, 0 }
-          let(:to)   { Time.new 2013, 1, 31, 23, 59, 59 }
+        context 'when different hours' do
+          let(:from) { Time.utc 2013, 2, 1, 0, 2, 0 }
+          let(:to)   { Time.utc 2013, 1, 31, 23, 59, 59 }
 
           it { is_expected.to eq expected_result }
         end
@@ -140,15 +140,15 @@ describe Moments::Difference do
 
       context 'when future' do
         context 'when the same day' do
-          let(:from) { Time.new 2013, 1, 1, 0, 0, 0 }
-          let(:to)   { Time.new 2013, 1, 1, 3, 2, 1 }
+          let(:from) { Time.utc 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.utc 2013, 1, 1, 3, 2, 1 }
 
           it { is_expected.to eq expected_result }
         end
 
         context 'when different days' do
-          let(:from) { Time.new 2013, 1, 31, 23, 59, 59 }
-          let(:to)   { Time.new 2013, 2, 1, 3, 2, 0 }
+          let(:from) { Time.utc 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.utc 2013, 2, 1, 3, 2, 0 }
 
           it { is_expected.to eq expected_result }
         end
@@ -156,15 +156,15 @@ describe Moments::Difference do
 
       context 'when past' do
         context 'when the same day' do
-          let(:from) { Time.new 2013, 1, 1, 3, 2, 1 }
-          let(:to)   { Time.new 2013, 1, 1, 0, 0, 0 }
+          let(:from) { Time.utc 2013, 1, 1, 3, 2, 1 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 0, 0 }
 
           it { is_expected.to eq expected_result }
         end
 
         context 'when different days' do
-          let(:from) { Time.new 2013, 2, 1, 3, 2, 0 }
-          let(:to)   { Time.new 2013, 1, 31, 23, 59, 59 }
+          let(:from) { Time.utc 2013, 2, 1, 3, 2, 0 }
+          let(:to)   { Time.utc 2013, 1, 31, 23, 59, 59 }
 
           it { is_expected.to eq expected_result }
         end
@@ -184,32 +184,50 @@ describe Moments::Difference do
       end
 
       context 'when future' do
-        context 'when the same day' do
-          let(:from) { Time.new 2013, 1, 1, 0, 0, 0 }
-          let(:to)   { Time.new 2013, 1, 5, 3, 2, 1 }
+        context 'when the same month' do
+          let(:from) { Time.utc 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.utc 2013, 1, 5, 3, 2, 1 }
 
           it { is_expected.to eq expected_result }
         end
 
-        context 'when different days' do
-          let(:from) { Time.new 2013, 1, 31, 23, 59, 59 }
-          let(:to)   { Time.new 2013, 2, 5, 3, 2, 0 }
+        context 'when different months' do
+          let(:from) { Time.utc 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.utc 2013, 2, 5, 3, 2, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when `to` month has a fewer days than `from`' do
+          let(:from) { Time.utc 2013, 1, 31, 3, 2, 0 }
+          let(:to)   { Time.utc 2013, 2, 28, 23, 59, 59 }
+
+          let(:expected_result) do
+            {
+              years: 0,
+              months: 0,
+              days: 28,
+              hours: 20,
+              minutes: 57,
+              seconds: 59
+            }
+          end
 
           it { is_expected.to eq expected_result }
         end
       end
 
       context 'when past' do
-        context 'when the same day' do
-          let(:from) { Time.new 2013, 1, 5, 3, 2, 1 }
-          let(:to)   { Time.new 2013, 1, 1, 0, 0, 0 }
+        context 'when the same month' do
+          let(:from) { Time.utc 2013, 1, 5, 3, 2, 1 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 0, 0 }
 
           it { is_expected.to eq expected_result }
         end
 
-        context 'when different days' do
-          let(:from) { Time.new 2013, 2, 5, 3, 2, 0 }
-          let(:to)   { Time.new 2013, 1, 31, 23, 59, 59 }
+        context 'when different months' do
+          let(:from) { Time.utc 2013, 2, 5, 3, 2, 0 }
+          let(:to)   { Time.utc 2013, 1, 31, 23, 59, 59 }
 
           it { is_expected.to eq expected_result }
         end
@@ -229,32 +247,32 @@ describe Moments::Difference do
       end
 
       context 'when future' do
-        context 'when the same day' do
-          let(:from) { Time.new 2013, 1, 1, 0, 0, 0 }
-          let(:to)   { Time.new 2013, 6, 5, 3, 2, 1 }
+        context 'when the same year' do
+          let(:from) { Time.utc 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.utc 2013, 6, 5, 3, 2, 1 }
 
           it { is_expected.to eq expected_result }
         end
 
-        context 'when different days' do
-          let(:from) { Time.new 2013, 1, 31, 23, 59, 59 }
-          let(:to)   { Time.new 2013, 7, 5, 3, 2, 0 }
+        context 'when different years' do
+          let(:from) { Time.utc 2012, 8, 27, 20, 57, 58 }
+          let(:to)   { Time.utc 2013, 1, 31, 23, 59, 59 }
 
           it { is_expected.to eq expected_result }
         end
       end
 
       context 'when past' do
-        context 'when the same day' do
-          let(:from) { Time.new 2013, 6, 5, 3, 2, 1 }
-          let(:to)   { Time.new 2013, 1, 1, 0, 0, 0 }
+        context 'when the same year' do
+          let(:from) { Time.utc 2013, 6, 5, 3, 2, 1 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 0, 0 }
 
           it { is_expected.to eq expected_result }
         end
 
-        context 'when different days' do
-          let(:from) { Time.new 2013, 7, 5, 3, 2, 0 }
-          let(:to)   { Time.new 2013, 1, 31, 23, 59, 59 }
+        context 'when different years' do
+          let(:from) { Time.utc 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.utc 2012, 8, 27, 20, 57, 58 }
 
           it { is_expected.to eq expected_result }
         end
@@ -274,32 +292,58 @@ describe Moments::Difference do
       end
 
       context 'when future' do
-        context 'when the same day' do
-          let(:from) { Time.new 2013, 1, 1, 0, 0, 0 }
-          let(:to)   { Time.new 2019, 6, 5, 3, 2, 1 }
+        let(:from) { Time.utc 2013, 1, 1, 0, 0, 0 }
+        let(:to)   { Time.utc 2019, 6, 5, 3, 2, 1 }
+
+        it { is_expected.to eq expected_result }
+      end
+
+      context 'when past' do
+        let(:from) { Time.utc 2019, 6, 5, 3, 2, 1 }
+        let(:to)   { Time.utc 2013, 1, 1, 0, 0, 0 }
+
+        it { is_expected.to eq expected_result }
+      end
+
+      context 'with DateTime class' do
+        context 'when future' do
+          let(:from) { DateTime.new 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { DateTime.new 2019, 6, 5, 3, 2, 1 }
 
           it { is_expected.to eq expected_result }
         end
 
-        context 'when different days' do
-          let(:from) { Time.new 2013, 1, 31, 23, 59, 59 }
-          let(:to)   { Time.new 2019, 7, 5, 3, 2, 0 }
+        context 'when past' do
+          let(:from) { DateTime.new 2019, 6, 5, 3, 2, 1 }
+          let(:to)   { DateTime.new 2013, 1, 1, 0, 0, 0 }
 
           it { is_expected.to eq expected_result }
         end
       end
 
-      context 'when past' do
-        context 'when the same day' do
-          let(:from) { Time.new 2019, 6, 5, 3, 2, 1 }
-          let(:to)   { Time.new 2013, 1, 1, 0, 0, 0 }
+      context 'with Date class' do
+        let(:expected_result) do
+          {
+            years: 6,
+            months: 5,
+            days: 4,
+
+            hours: 0,
+            minutes: 0,
+            seconds: 0
+          }
+        end
+
+        context 'when future' do
+          let(:from) { Date.new 2013, 1, 1 }
+          let(:to)   { Date.new 2019, 6, 5 }
 
           it { is_expected.to eq expected_result }
         end
 
-        context 'when different days' do
-          let(:from) { Time.new 2019, 7, 5, 3, 2, 0 }
-          let(:to)   { Time.new 2013, 1, 31, 23, 59, 59 }
+        context 'when past' do
+          let(:from) { Date.new 2019, 6, 5 }
+          let(:to)   { Date.new 2013, 1, 1 }
 
           it { is_expected.to eq expected_result }
         end
@@ -318,8 +362,8 @@ describe Moments::Difference do
         }
       end
 
-      let(:from) { Time.new 2008, 2, 28 }
-      let(:to)   { Time.new 2008, 3, 1 }
+      let(:from) { Time.utc 2008, 2, 28 }
+      let(:to)   { Time.utc 2008, 3, 1 }
 
       it { is_expected.to eq expected_result }
     end
@@ -335,15 +379,15 @@ describe Moments::Difference do
     end
 
     context 'when `from` is earlier than `to`' do
-      let(:from) { Time.new 2020, 1, 1 }
-      let(:to)   { Time.new 2020, 1, 2 }
+      let(:from) { Time.utc 2020, 1, 1 }
+      let(:to)   { Time.utc 2020, 1, 2 }
 
       it { is_expected.to eq false }
     end
 
     context 'when `to` is earlier than `from`' do
-      let(:from) { Time.new 2020, 1, 2 }
-      let(:to)   { Time.new 2020, 1, 1 }
+      let(:from) { Time.utc 2020, 1, 2 }
+      let(:to)   { Time.utc 2020, 1, 1 }
 
       it { is_expected.to eq false }
     end
@@ -359,15 +403,15 @@ describe Moments::Difference do
     end
 
     context 'when `from` is earlier than `to`' do
-      let(:from) { Time.new 2020, 1, 1 }
-      let(:to)   { Time.new 2020, 1, 2 }
+      let(:from) { Time.utc 2020, 1, 1 }
+      let(:to)   { Time.utc 2020, 1, 2 }
 
       it { is_expected.to eq true }
     end
 
     context 'when `to` is earlier than `from`' do
-      let(:from) { Time.new 2020, 1, 2 }
-      let(:to)   { Time.new 2020, 1, 1 }
+      let(:from) { Time.utc 2020, 1, 2 }
+      let(:to)   { Time.utc 2020, 1, 1 }
 
       it { is_expected.to eq false }
     end
@@ -383,17 +427,368 @@ describe Moments::Difference do
     end
 
     context 'when `from` is earlier than `to`' do
-      let(:from) { Time.new 2020, 1, 1 }
-      let(:to)   { Time.new 2020, 1, 2 }
+      let(:from) { Time.utc 2020, 1, 1 }
+      let(:to)   { Time.utc 2020, 1, 2 }
 
       it { is_expected.to eq false }
     end
 
     context 'when `to` is earlier than `from`' do
-      let(:from) { Time.new 2020, 1, 2 }
-      let(:to)   { Time.new 2020, 1, 1 }
+      let(:from) { Time.utc 2020, 1, 2 }
+      let(:to)   { Time.utc 2020, 1, 1 }
 
       it { is_expected.to eq true }
     end
+  end
+
+  shared_examples 'in a component' do |
+    when_seconds:,
+    when_minutes:,
+    when_hours:,
+    when_days:,
+    when_months:,
+    when_years:
+  |
+    context 'with equal dates' do
+      let(:to) { from }
+
+      it { is_expected.to eq 0 }
+    end
+
+    context 'when seconds' do
+      let(:expected_result) { when_seconds }
+
+      context 'when future' do
+        context 'when the same day' do
+          let(:from) { Time.utc 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 0, 15 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.utc 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.utc 2013, 2, 1, 0, 0, 14 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+
+      context 'when past' do
+        context 'when the same day' do
+          let(:from) { Time.utc 2013, 1, 1, 0, 0, 15 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 0, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.utc 2013, 2, 1, 0, 0, 14 }
+          let(:to)   { Time.utc 2013, 1, 31, 23, 59, 59 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+    end
+
+    context 'when minutes' do
+      let(:expected_result) { when_minutes }
+
+      context 'when future' do
+        context 'when the same day' do
+          let(:from) { Time.utc 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 12, 15 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.utc 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.utc 2013, 2, 1, 0, 12, 14 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+
+      context 'when past' do
+        context 'when the same day' do
+          let(:from) { Time.utc 2013, 1, 1, 0, 12, 15 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 0, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.utc 2013, 2, 1, 0, 12, 14 }
+          let(:to)   { Time.utc 2013, 1, 31, 23, 59, 59 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+    end
+
+    context 'when hours' do
+      let(:expected_result) { when_hours }
+
+      context 'when future' do
+        context 'when the same day' do
+          let(:from) { Time.utc 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.utc 2013, 1, 1, 8, 12, 15 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.utc 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.utc 2013, 2, 1, 8, 12, 14 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+
+      context 'when past' do
+        context 'when the same day' do
+          let(:from) { Time.utc 2013, 1, 1, 8, 12, 15 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 0, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.utc 2013, 2, 1, 8, 12, 14 }
+          let(:to)   { Time.utc 2013, 1, 31, 23, 59, 59 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+    end
+
+    context 'when days' do
+      let(:expected_result) { when_days }
+
+      context 'when future' do
+        context 'when the same day' do
+          let(:from) { Time.utc 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.utc 2013, 1, 7, 8, 12, 15 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.utc 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.utc 2013, 2, 7, 8, 12, 14 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+
+      context 'when past' do
+        context 'when the same day' do
+          let(:from) { Time.utc 2013, 1, 7, 8, 12, 15 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 0, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.utc 2013, 2, 7, 8, 12, 14 }
+          let(:to)   { Time.utc 2013, 1, 31, 23, 59, 59 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+    end
+
+    describe 'when months' do
+      let(:expected_result) { when_months }
+
+      context 'when future' do
+        context 'when the same day' do
+          let(:from) { Time.utc 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.utc 2013, 5, 7, 8, 12, 15 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.utc 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.utc 2013, 6, 7, 8, 12, 14 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+
+      context 'when past' do
+        context 'when the same day' do
+          let(:from) { Time.utc 2013, 5, 7, 8, 12, 15 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 0, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.utc 2013, 6, 7, 8, 12, 14 }
+          let(:to)   { Time.utc 2013, 1, 31, 23, 59, 59 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+    end
+
+    context 'when years' do
+      let(:expected_result) { when_years }
+
+      context 'when future' do
+        context 'when the same day' do
+          let(:from) { Time.utc 2013, 1, 1, 0, 0, 0 }
+          let(:to)   { Time.utc 2015, 5, 7, 8, 12, 15 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.utc 2013, 1, 31, 23, 59, 59 }
+          let(:to)   { Time.utc 2015, 6, 7, 8, 12, 14 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'with DateTime class' do
+          context 'when the same day' do
+            let(:from) { DateTime.new 2013, 1, 1, 0, 0, 0 }
+            let(:to)   { DateTime.new 2015, 5, 7, 8, 12, 15 }
+
+            it { is_expected.to eq expected_result }
+          end
+
+          context 'when different days' do
+            let(:from) { DateTime.new 2013, 1, 31, 23, 59, 59 }
+            let(:to)   { DateTime.new 2015, 6, 7, 8, 12, 14 }
+
+            it { is_expected.to eq expected_result }
+          end
+        end
+      end
+
+      context 'when past' do
+        context 'when the same day' do
+          let(:from) { Time.utc 2015, 5, 7, 8, 12, 15 }
+          let(:to)   { Time.utc 2013, 1, 1, 0, 0, 0 }
+
+          it { is_expected.to eq expected_result }
+        end
+
+        context 'when different days' do
+          let(:from) { Time.utc 2015, 6, 7, 8, 12, 14 }
+          let(:to)   { Time.utc 2013, 1, 31, 23, 59, 59 }
+
+          it { is_expected.to eq expected_result }
+        end
+      end
+    end
+  end
+
+  context '#in_seconds' do
+    subject { Moments::Difference.new(from, to).in_seconds }
+
+    include_examples 'in a component',
+      when_seconds: 15,
+      when_minutes: 12 * 60 + 15,
+      when_hours: 8 * 60 * 60 + 12 * 60 + 15,
+      when_days: 6 * 24 * 60 * 60 + 8 * 60 * 60 + 12 * 60 + 15,
+      when_months:
+        (31 + 28 + 31 + 30) * 24 * 60 * 60 +
+          6 * 24 * 60 * 60 +
+          8 * 60 * 60 +
+          12 * 60 +
+          15,
+      when_years:
+        2 * 365 * 24 * 60 * 60 +
+          (31 + 28 + 31 + 30) * 24 * 60 * 60 +
+          6 * 24 * 60 * 60 +
+          8 * 60 * 60 +
+          12 * 60 +
+          15
+  end
+
+  context '#in_minutes' do
+    subject { Moments::Difference.new(from, to).in_minutes }
+
+    include_examples 'in a component',
+      when_seconds: 0,
+      when_minutes: 12,
+      when_hours: 8 * 60 + 12,
+      when_days: 6 * 24 * 60 + 8 * 60 + 12,
+      when_months:
+        (31 + 28 + 31 + 30) * 24 * 60 +
+          6 * 24 * 60 +
+          8 * 60 +
+          12,
+      when_years:
+        2 * 365 * 24 * 60 +
+          (31 + 28 + 31 + 30) * 24 * 60 +
+          6 * 24 * 60 +
+          8 * 60 +
+          12
+  end
+
+  context '#in_hours' do
+    subject { Moments::Difference.new(from, to).in_hours }
+
+    include_examples 'in a component',
+      when_seconds: 0,
+      when_minutes: 0,
+      when_hours: 8,
+      when_days: 6 * 24 + 8,
+      when_months:
+        (31 + 28 + 31 + 30) * 24 +
+          6 * 24 +
+          8,
+      when_years:
+        2 * 365 * 24 +
+          (31 + 28 + 31 + 30) * 24 +
+          6 * 24 +
+          8
+  end
+
+  context '#in_days' do
+    subject { Moments::Difference.new(from, to).in_days }
+
+    include_examples 'in a component',
+      when_seconds: 0,
+      when_minutes: 0,
+      when_hours: 0,
+      when_days: 6,
+      when_months:
+        (31 + 28 + 31 + 30) +
+          6,
+      when_years:
+        2 * 365 +
+          (31 + 28 + 31 + 30) +
+          6
+  end
+
+  context '#in_months' do
+    subject { Moments::Difference.new(from, to).in_months }
+
+    include_examples 'in a component',
+      when_seconds: 0,
+      when_minutes: 0,
+      when_hours: 0,
+      when_days: 0,
+      when_months: 4,
+      when_years: 2 * 12 + 4
+  end
+
+  context '#in_years' do
+    subject { Moments::Difference.new(from, to).in_years }
+
+    include_examples 'in a component',
+      when_seconds: 0,
+      when_minutes: 0,
+      when_hours: 0,
+      when_days: 0,
+      when_months: 0,
+      when_years: 2
   end
 end
