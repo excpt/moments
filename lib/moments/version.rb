@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Moments::Version module
 module Moments
   def self.gem_version
@@ -9,13 +11,13 @@ module Moments
     # major version
     MAJOR = 0
     # minor version
-    MINOR = 0
-    # tiny version
-    TINY  = 2
+    MINOR = 1
+    # patch version
+    PATCH = 0
     # alpha, beta, etc. tag
-    PRE   = 'alpha'.freeze
+    PRE   = 'alpha'
 
     # Build version string
-    STRING = [MAJOR, MINOR, TINY, PRE].compact.join('.')
+    STRING = [MAJOR, MINOR, PATCH, PRE].compact.join('.')
   end
 end
