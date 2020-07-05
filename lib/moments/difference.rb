@@ -5,16 +5,19 @@ require 'date'
 module Moments
   # Calculates differences between two given Time instances.
   class Difference
-    PARTS = {
+    DATE_PARTS = {
       years: :year,
       months: :month,
-      days: :day,
+      days: :day
+    }.freeze
+
+    TIME_PARTS = {
       hours: :hour,
       minutes: :min,
       seconds: :sec
     }.freeze
 
-    private_constant :PARTS
+    private_constant :DATE_PARTS, :TIME_PARTS
 
     # == Parameters:
     # from::
@@ -22,8 +25,8 @@ module Moments
     # to::
     #   A instance of Time
     def initialize(from, to)
-      @from = from.to_time
-      @to = to.to_time
+      @from = parse_argument from
+      @to = parse_argument to
 
       @ordered_from, @ordered_to = [@from, @to].sort
 
@@ -70,10 +73,34 @@ module Moments
     end
 
     def in_years
-      @ordered_to.year - @ordered_from.year
+      years_diff = @ordered_to.year - @ordered_from.year
+
+      return years_diff unless years_diff.positive?
+      return years_diff if @ordered_to.month > @ordered_from.month
+
+      if (@ordered_to.month < @ordered_from.month) || (@ordered_to.mday < @ordered_from.mday)
+        years_diff -= 1
+      end
+
+      years_diff
     end
 
     private
+
+    TIME_CLASSES = [Time, DateTime].freeze
+
+    private_constant :TIME_CLASSES
+
+    def parse_argument(value)
+      case value
+      when *TIME_CLASSES
+        value.to_time.getutc
+      when Date
+        value
+      else
+        raise ArgumentError, 'Unsupported format'
+      end
+    end
 
     def precise_difference
       @diff = calculate_diff
@@ -88,12 +115,19 @@ module Moments
     end
 
     def calculate_diff
-      PARTS.transform_values do |method_name|
-        @ordered_to.public_send(method_name) - @ordered_from.public_send(method_name)
+      are_time_parts = [@from, @to].all? do |value|
+        TIME_CLASSES.any? { |time_class| value.is_a?(time_class) }
       end
+
+      (are_time_parts ? DATE_PARTS.merge(TIME_PARTS) : DATE_PARTS)
+        .transform_values do |method_name|
+          @ordered_to.public_send(method_name) - @ordered_from.public_send(method_name)
+        end
     end
 
     def calculate(attribute, difference, stepping = 60)
+      return unless @diff.key?(attribute) && @diff.key?(difference)
+
       return if @diff[attribute] >= 0
 
       @diff[attribute] += stepping

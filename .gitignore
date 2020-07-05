@@ -25,3 +25,4 @@ mkmf.log
 *.ipr
 *.iws
 .idea/
+.ruby-version
