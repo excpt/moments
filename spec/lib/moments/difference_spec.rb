@@ -685,6 +685,36 @@ describe Moments::Difference do
           8 * 60 * 60 +
           12 * 60 +
           15
+
+    context 'with miliseconds' do
+      context 'when `to` is a bit greater' do
+        let(:from) { Time.utc(2020, 7, 11, 20, 26, 12) }
+        let(:to)   { Time.utc(2020, 7, 11, 20, 28, 39.149092) }
+
+        it { is_expected.to eq 147 }
+      end
+
+      context 'when `from` is a bit greater' do
+        let(:from) { Time.utc(2020, 7, 11, 20, 26, 12.149092) }
+        let(:to)   { Time.utc(2020, 7, 11, 20, 28, 39) }
+
+        it { is_expected.to eq 147 }
+      end
+
+      context 'when `to` is a lot greater' do
+        let(:from) { Time.utc(2020, 7, 11, 20, 26, 12) }
+        let(:to)   { Time.utc(2020, 7, 11, 20, 28, 39.896152) }
+
+        it { is_expected.to eq 147 }
+      end
+
+      context 'when `from` is a lot greater' do
+        let(:from) { Time.utc(2020, 7, 11, 20, 26, 12.896152) }
+        let(:to)   { Time.utc(2020, 7, 11, 20, 28, 39) }
+
+        it { is_expected.to eq 147 }
+      end
+    end
   end
 
   context '#in_minutes' do
