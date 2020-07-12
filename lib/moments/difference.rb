@@ -50,7 +50,7 @@ module Moments
     end
 
     def in_seconds
-      (@ordered_to - @ordered_from).ceil
+      @ordered_to.to_i - @ordered_from.to_i
     end
 
     def in_minutes
