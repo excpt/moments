@@ -15,7 +15,7 @@ module Moments
     # patch version
     PATCH = 0
     # alpha, beta, etc. tag
-    PRE   = 'alpha'
+    PRE   = nil
 
     # Build version string
     STRING = [MAJOR, MINOR, PATCH, PRE].compact.join('.')
