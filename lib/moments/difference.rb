@@ -96,10 +96,20 @@ module Moments
       when *TIME_CLASSES
         value.to_time.getutc
       when Date
-        value
+        value.to_time.getutc
+      when String
+        begin
+          Time.parse(value).getutc
+        rescue
+          unsupported_format
+        end
       else
-        raise ArgumentError, 'Unsupported format'
+        unsupported_format
       end
+    end
+
+    def unsupported_format
+      raise ArgumentError, 'Unsupported format'
     end
 
     def precise_difference
