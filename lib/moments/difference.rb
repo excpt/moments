@@ -65,6 +65,10 @@ module Moments
       in_hours / 24
     end
 
+    def in_weeks
+      in_days / 7
+    end
+
     def in_months
       months_diff = @ordered_to.month - @ordered_from.month
       months_diff -= 1 if months_diff.positive? && @ordered_to.mday < @ordered_from.mday
