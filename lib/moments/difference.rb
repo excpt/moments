@@ -100,7 +100,7 @@ module Moments
       when String
         begin
           Time.parse(value).getutc
-        rescue
+        rescue ArgumentError => e
           unsupported_format
         end
       else
