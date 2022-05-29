@@ -97,8 +97,10 @@ module Moments
 
     def parse_argument(value)
       case value
-      when *TIME_CLASSES, Date
+      when *TIME_CLASSES
         value.to_time.getutc
+      when Date
+        value.to_time
       when String
         begin
           Time.parse(value).getutc
