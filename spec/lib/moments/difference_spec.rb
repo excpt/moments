@@ -333,7 +333,10 @@ describe Moments::Difference do
           {
             years: 6,
             months: 5,
-            days: 4
+            days: 4,
+            hours: 0,
+            minutes: 0,
+            seconds: 0
           }
         end
 
