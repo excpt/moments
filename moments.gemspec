@@ -11,15 +11,15 @@ Gem::Specification.new do |spec|
   spec.description = ''
   spec.homepage    = 'https://github.com/excpt/moments'
   spec.license     = 'MIT'
+  spec.metadata['rubygems_mfa_required'] = 'true'
 
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
   spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'github_changelog_generator'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'github_changelog_generator'
 end

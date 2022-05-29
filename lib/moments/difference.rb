@@ -73,7 +73,7 @@ module Moments
       months_diff = @ordered_to.month - @ordered_from.month
       months_diff -= 1 if months_diff.positive? && @ordered_to.mday < @ordered_from.mday
 
-      (@ordered_to.year - @ordered_from.year) * 12 + months_diff
+      ((@ordered_to.year - @ordered_from.year) * 12) + months_diff
     end
 
     def in_years
@@ -97,14 +97,12 @@ module Moments
 
     def parse_argument(value)
       case value
-      when *TIME_CLASSES
-        value.to_time.getutc
-      when Date
+      when *TIME_CLASSES, Date
         value.to_time.getutc
       when String
         begin
           Time.parse(value).getutc
-        rescue ArgumentError => e
+        rescue ArgumentError
           unsupported_format
         end
       else

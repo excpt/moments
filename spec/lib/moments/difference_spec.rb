@@ -447,14 +447,7 @@ describe Moments::Difference do
     end
   end
 
-  shared_examples 'in a component' do |
-    when_seconds:,
-    when_minutes:,
-    when_hours:,
-    when_days:,
-    when_months:,
-    when_years:
-  |
+  shared_examples 'in a component' do |when_seconds:, when_minutes:, when_hours:, when_days:, when_months:, when_years:|
     context 'with equal dates' do
       let(:to) { from }
 
@@ -671,23 +664,23 @@ describe Moments::Difference do
     subject { Moments::Difference.new(from, to).in_seconds }
 
     include_examples 'in a component',
-      when_seconds: 15,
-      when_minutes: 12 * 60 + 15,
-      when_hours: 8 * 60 * 60 + 12 * 60 + 15,
-      when_days: 6 * 24 * 60 * 60 + 8 * 60 * 60 + 12 * 60 + 15,
-      when_months:
-        (31 + 28 + 31 + 30) * 24 * 60 * 60 +
-          6 * 24 * 60 * 60 +
-          8 * 60 * 60 +
-          12 * 60 +
-          15,
-      when_years:
-        2 * 365 * 24 * 60 * 60 +
-          (31 + 28 + 31 + 30) * 24 * 60 * 60 +
-          6 * 24 * 60 * 60 +
-          8 * 60 * 60 +
-          12 * 60 +
-          15
+                     when_seconds: 15,
+                     when_minutes: (12 * 60) + 15,
+                     when_hours: (8 * 60 * 60) + (12 * 60) + 15,
+                     when_days: (6 * 24 * 60 * 60) + (8 * 60 * 60) + (12 * 60) + 15,
+                     when_months:
+                       ((31 + 28 + 31 + 30) * 24 * 60 * 60) +
+                         (6 * 24 * 60 * 60) +
+                         (8 * 60 * 60) +
+                         (12 * 60) +
+                         15,
+                     when_years:
+                       (2 * 365 * 24 * 60 * 60) +
+                         ((31 + 28 + 31 + 30) * 24 * 60 * 60) +
+                         (6 * 24 * 60 * 60) +
+                         (8 * 60 * 60) +
+                         (12 * 60) +
+                         15
 
     context 'with miliseconds' do
       context 'when `to` is a bit greater' do
@@ -724,81 +717,81 @@ describe Moments::Difference do
     subject { Moments::Difference.new(from, to).in_minutes }
 
     include_examples 'in a component',
-      when_seconds: 0,
-      when_minutes: 12,
-      when_hours: 8 * 60 + 12,
-      when_days: 6 * 24 * 60 + 8 * 60 + 12,
-      when_months:
-        (31 + 28 + 31 + 30) * 24 * 60 +
-          6 * 24 * 60 +
-          8 * 60 +
-          12,
-      when_years:
-        2 * 365 * 24 * 60 +
-          (31 + 28 + 31 + 30) * 24 * 60 +
-          6 * 24 * 60 +
-          8 * 60 +
-          12
+                     when_seconds: 0,
+                     when_minutes: 12,
+                     when_hours: (8 * 60) + 12,
+                     when_days: (6 * 24 * 60) + (8 * 60) + 12,
+                     when_months:
+                       ((31 + 28 + 31 + 30) * 24 * 60) +
+                         (6 * 24 * 60) +
+                         (8 * 60) +
+                         12,
+                     when_years:
+                       (2 * 365 * 24 * 60) +
+                         ((31 + 28 + 31 + 30) * 24 * 60) +
+                         (6 * 24 * 60) +
+                         (8 * 60) +
+                         12
   end
 
   context '#in_hours' do
     subject { Moments::Difference.new(from, to).in_hours }
 
     include_examples 'in a component',
-      when_seconds: 0,
-      when_minutes: 0,
-      when_hours: 8,
-      when_days: 6 * 24 + 8,
-      when_months:
-        (31 + 28 + 31 + 30) * 24 +
-          6 * 24 +
-          8,
-      when_years:
-        2 * 365 * 24 +
-          (31 + 28 + 31 + 30) * 24 +
-          6 * 24 +
-          8
+                     when_seconds: 0,
+                     when_minutes: 0,
+                     when_hours: 8,
+                     when_days: (6 * 24) + 8,
+                     when_months:
+                       ((31 + 28 + 31 + 30) * 24) +
+                         (6 * 24) +
+                         8,
+                     when_years:
+                       (2 * 365 * 24) +
+                         ((31 + 28 + 31 + 30) * 24) +
+                         (6 * 24) +
+                         8
   end
 
   context '#in_days' do
     subject { Moments::Difference.new(from, to).in_days }
 
     include_examples 'in a component',
-      when_seconds: 0,
-      when_minutes: 0,
-      when_hours: 0,
-      when_days: 6,
-      when_months:
-        (31 + 28 + 31 + 30) +
-          6,
-      when_years:
-        2 * 365 +
-          (31 + 28 + 31 + 30) +
-          6
+                     when_seconds: 0,
+                     when_minutes: 0,
+                     when_hours: 0,
+                     when_days: 6,
+                     when_months:
+                       (31 + 28 + 31 + 30) +
+                         6,
+                     when_years:
+                       (2 * 365) +
+                         (31 + 28 + 31 + 30) +
+                         6
   end
 
   context '#in_months' do
     subject { Moments::Difference.new(from, to).in_months }
 
     include_examples 'in a component',
-      when_seconds: 0,
-      when_minutes: 0,
-      when_hours: 0,
-      when_days: 0,
-      when_months: 4,
-      when_years: 2 * 12 + 4
+                     when_seconds: 0,
+                     when_minutes: 0,
+                     when_hours: 0,
+                     when_days: 0,
+                     when_months: 4,
+                     when_years: (2 * 12) + 4
   end
 
   context '#in_years' do
     subject { Moments::Difference.new(from, to).in_years }
 
     include_examples 'in a component',
-      when_seconds: 0,
-      when_minutes: 0,
-      when_hours: 0,
-      when_days: 0,
-      when_months: 0,
-      when_years: 2
+                     when_seconds: 0,
+                     when_minutes: 0,
+                     when_hours: 0,
+                     when_days: 0,
+                     when_months: 0,
+                     when_years: 2
 
     context 'when `to` day is greater than `from` day' do
       let(:from) { Time.utc 2013, 1, 1, 0, 0, 0 }
