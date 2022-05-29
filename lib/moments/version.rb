@@ -11,7 +11,7 @@ module Moments
     # major version
     MAJOR = 0
     # minor version
-    MINOR = 1
+    MINOR = 2
     # patch version
     PATCH = 0
     # alpha, beta, etc. tag
