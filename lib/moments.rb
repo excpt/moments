@@ -5,7 +5,7 @@ require_relative 'moments/difference'
 
 # Entrypoint for the moments gem
 module Moments
-  def self.difference(from, to)
-    Moments::Difference.new from, to
+  def self.difference(from, to, mode = :normal)
+    Moments::Difference.new from, to, mode
   end
 end

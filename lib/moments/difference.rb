@@ -21,12 +21,15 @@ module Moments
 
     # == Parameters:
     # from::
-    #   A instance of Time
+    #   An instance of Time
     # to::
-    #   A instance of Time
-    def initialize(from, to)
+    #   An instance of Time
+    # precise::
+    #   Option to return minutes, hours, days, years as decimals intead of integer
+    def initialize(from, to, mode = :normal)
       @from = parse_argument from
       @to = parse_argument to
+      @precise = mode == :precise
 
       @ordered_from, @ordered_to = [@from, @to].sort
 
@@ -54,19 +57,19 @@ module Moments
     end
 
     def in_minutes
-      in_seconds / 60
+      in_seconds / (@precise ? 60.0 : 60)
     end
 
     def in_hours
-      in_minutes / 60
+      in_minutes / (@precise ? 60.0 : 60)
     end
 
     def in_days
-      in_hours / 24
+      in_hours / (@precise ? 24.0 : 24)
     end
 
     def in_weeks
-      in_days / 7
+      in_days / (@precise ? 7.0 : 7)
     end
 
     def in_months

@@ -7,6 +7,7 @@ AllCops:
   Exclude:
     - 'gemfiles/*.gemfile'
     - 'vendor/**/*'
+    - 'spec/**/*'
 
 Style/Documentation:
   Enabled: false
