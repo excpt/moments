@@ -44,6 +44,11 @@ puts diff.to_hash
 puts diff.in_months
 # 67 (5 * 12 + 7)
 # there are also methods for each component
+
+ago = Moments.ago t1
+
+puts ago.to_hash
+# { years: 5, months: 7, days: 5, hours: 19, minutes: 29, seconds: 6 }
 ```
 
 ## Contributing
