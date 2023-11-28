@@ -92,6 +92,16 @@ module Moments
       years_diff
     end
 
+    def humanized
+      diff_parts = to_hash.each_with_object([]) do |(unit, quantity), parts|
+        parts << "#{quantity} #{quantity == 1 ? unit.to_s[0..-2] : unit}" if quantity.positive?
+      end
+      last_part = diff_parts.pop
+      return last_part if diff_parts.empty?
+
+      [diff_parts.join(', '), last_part].join(' and ')
+    end
+
     private
 
     TIME_CLASSES = [Time, DateTime].freeze
