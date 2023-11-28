@@ -807,4 +807,39 @@ describe Moments::Difference do
       it { is_expected.to eq 1 }
     end
   end
+
+  context '#humanized' do
+    subject { Moments::Difference.new(from, to).humanized }
+
+    let (:from) { Time.utc 2020, 1, 1, 0, 0, 0 }
+
+    {
+      [2021, 1, 1, 0, 0, 0] => '1 year',
+      [2020, 2, 1, 0, 0, 0] => '1 month',
+      [2020, 1, 2, 0, 0, 0] => '1 day',
+      [2020, 1, 1, 1, 0, 0] => '1 hour',
+      [2020, 1, 1, 0, 1, 0] => '1 minute',
+      [2020, 1, 1, 0, 0, 1] => '1 second',
+      [2022, 1, 1, 0, 0, 0] => '2 years',
+      [2020, 4, 1, 0, 0, 0] => '3 months',
+      [2020, 1, 5, 0, 0, 0] => '4 days',
+      [2020, 1, 1, 5, 0, 0] => '5 hours',
+      [2020, 1, 1, 0, 6, 0] => '6 minutes',
+      [2020, 1, 1, 0, 0, 7] => '7 seconds',
+      [2021, 2, 1, 0, 0, 0] => '1 year and 1 month',
+      [2021, 1, 2, 0, 0, 0] => '1 year and 1 day',
+      [2021, 1, 1, 1, 0, 0] => '1 year and 1 hour',
+      [2021, 1, 1, 0, 1, 0] => '1 year and 1 minute',
+      [2021, 1, 1, 0, 0, 1] => '1 year and 1 second',
+      [2021, 2, 2, 0, 0, 0] => '1 year, 1 month and 1 day',
+      [2021, 2, 1, 1, 0, 0] => '1 year, 1 month and 1 hour',
+      [2022, 4, 5, 5, 6, 7] => '2 years, 3 months, 4 days, 5 hours, 6 minutes and 7 seconds'
+    }.each do |time_array, string|
+      context "with #{string}" do
+        let (:to) { Time.utc *time_array }
+
+        it { is_expected.to eq string}
+      end
+    end
+  end
 end

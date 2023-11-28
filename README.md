@@ -49,6 +49,13 @@ ago = Moments.ago t1
 
 puts ago.to_hash
 # { years: 5, months: 7, days: 5, hours: 19, minutes: 29, seconds: 6 }
+
+puts ago.humanized
+# 5 years, 7 months, 5 days, 19 hours, 29 minutes and 6 seconds
+
+# #humanized takes care of signularity and omits 0 values
+puts Moments.difference(t1, Time.new(2015, 2, 1, 19, 0, 1)).humanized
+# 1 month, 19 hours and 1 second
 ```
 
 ## Contributing
