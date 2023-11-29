@@ -1,8 +1,25 @@
 # Changelog
 
-## [Unreleased](https://github.com/excpt/moments/tree/HEAD)
+## [v0.3.0](https://github.com/excpt/moments/tree/v0.3.0) (2023-11-29)
 
-[Full Changelog](https://github.com/excpt/moments/compare/v0.1.0...HEAD)
+[Full Changelog](https://github.com/excpt/moments/compare/v0.2.0...v0.3.0)
+
+**Implemented enhancements:**
+
+- Precision? [\#11](https://github.com/excpt/moments/issues/11)
+
+**Closed issues:**
+
+- Add documentation for new precision parameter [\#13](https://github.com/excpt/moments/issues/13)
+
+**Merged pull requests:**
+
+- A few enhancements [\#15](https://github.com/excpt/moments/pull/15) ([Kris-LIBIS](https://github.com/Kris-LIBIS))
+- Intruduce optional mode parameter [\#12](https://github.com/excpt/moments/pull/12) ([excpt](https://github.com/excpt))
+
+## [v0.2.0](https://github.com/excpt/moments/tree/v0.2.0) (2022-05-29)
+
+[Full Changelog](https://github.com/excpt/moments/compare/v0.1.0...v0.2.0)
 
 **Closed issues:**
 
