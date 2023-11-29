@@ -39,6 +39,13 @@ puts diff.in_months
 # 67 (5 * 12 + 7)
 # there are also methods for each component
 
+from = Time.new(2022, 8, 4, 15, 52, 25, '-06:00')
+to = Time.new(2022, 8, 18, 15, 52, 31, '-06:00')
+
+difference = Moments.difference(from, to, :precise).in_minutes
+# returns: 20_160.1
+# supports: in_weeks, in_days, in_hours, in_minutes
+
 ago = Moments.ago t1
 
 puts ago.to_hash
