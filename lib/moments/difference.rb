@@ -85,9 +85,7 @@ module Moments
       return years_diff unless years_diff.positive?
       return years_diff if @ordered_to.month > @ordered_from.month
 
-      if (@ordered_to.month < @ordered_from.month) || (@ordered_to.mday < @ordered_from.mday)
-        years_diff -= 1
-      end
+      years_diff -= 1 if (@ordered_to.month < @ordered_from.month) || (@ordered_to.mday < @ordered_from.mday)
 
       years_diff
     end

@@ -16,11 +16,14 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files -z`.split("\x0")
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
+  spec.required_ruby_version = '>= 2.5'
 
-  spec.add_development_dependency 'bundler'
-  spec.add_development_dependency 'github_changelog_generator'
-  spec.add_development_dependency 'rake'
-  spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'timecop'
+  spec.add_development_dependency 'bundler', '~> 2.4'
+  spec.add_development_dependency 'github_changelog_generator', '~> 1.16'
+  spec.add_development_dependency 'rake', '~> 13.1'
+  spec.add_development_dependency 'rspec', '~> 3.12'
+  spec.add_development_dependency 'rubocop', '~> 1.57'
+  spec.add_development_dependency 'rubocop-rake', '~> 0.6.0'
+  spec.add_development_dependency 'rubocop-rspec', '~> 2.25'
+  spec.add_development_dependency 'timecop', '~> 0.9.8'
 end

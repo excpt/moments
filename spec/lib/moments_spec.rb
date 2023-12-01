@@ -2,7 +2,7 @@
 
 require 'timecop'
 
-describe Moments do
+describe_class Moments do
   describe '#difference' do
     subject { Moments.difference(from, to) }
 
@@ -28,10 +28,10 @@ describe Moments do
 
     it { is_expected.to be_a Moments::Difference }
 
-    context '#to_hash' do
-
+    describe '#to_hash' do
       subject { Moments.ago(from).to_hash }
-      let (:expected_result) do
+
+      let(:expected_result) do
         {
           years: 6,
           months: 5,
@@ -42,8 +42,7 @@ describe Moments do
         }
       end
 
-      it { is_expected.to eq expected_result}
+      it { is_expected.to eq expected_result }
     end
-
   end
 end

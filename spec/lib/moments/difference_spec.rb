@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe Moments::Difference do
+describe_class Moments::Difference do
   let(:from) { Time.utc 2007, 1, 1 }
   let(:to)   { Time.utc 2012, 1, 1 }
 
@@ -10,7 +10,7 @@ describe Moments::Difference do
     end
   end
 
-  context '#to_hash' do
+  describe '#to_hash' do
     subject { Moments::Difference.new(from, to).to_hash }
 
     describe 'order of keys' do
@@ -356,7 +356,7 @@ describe Moments::Difference do
       end
     end
 
-    context 'leap year' do
+    context 'when leap year' do
       let(:expected_result) do
         {
           years: 0,
@@ -381,21 +381,21 @@ describe Moments::Difference do
     context 'with the same dates' do
       let(:to) { from }
 
-      it { is_expected.to eq true }
+      it { is_expected.to be true }
     end
 
     context 'when `from` is earlier than `to`' do
       let(:from) { Time.utc 2020, 1, 1 }
       let(:to)   { Time.utc 2020, 1, 2 }
 
-      it { is_expected.to eq false }
+      it { is_expected.to be false }
     end
 
     context 'when `to` is earlier than `from`' do
       let(:from) { Time.utc 2020, 1, 2 }
       let(:to)   { Time.utc 2020, 1, 1 }
 
-      it { is_expected.to eq false }
+      it { is_expected.to be false }
     end
   end
 
@@ -405,21 +405,21 @@ describe Moments::Difference do
     context 'with the same dates' do
       let(:to) { from }
 
-      it { is_expected.to eq false }
+      it { is_expected.to be false }
     end
 
     context 'when `from` is earlier than `to`' do
       let(:from) { Time.utc 2020, 1, 1 }
       let(:to)   { Time.utc 2020, 1, 2 }
 
-      it { is_expected.to eq true }
+      it { is_expected.to be true }
     end
 
     context 'when `to` is earlier than `from`' do
       let(:from) { Time.utc 2020, 1, 2 }
       let(:to)   { Time.utc 2020, 1, 1 }
 
-      it { is_expected.to eq false }
+      it { is_expected.to be false }
     end
   end
 
@@ -429,21 +429,21 @@ describe Moments::Difference do
     context 'with the same dates' do
       let(:to) { from }
 
-      it { is_expected.to eq false }
+      it { is_expected.to be false }
     end
 
     context 'when `from` is earlier than `to`' do
       let(:from) { Time.utc 2020, 1, 1 }
       let(:to)   { Time.utc 2020, 1, 2 }
 
-      it { is_expected.to eq false }
+      it { is_expected.to be false }
     end
 
     context 'when `to` is earlier than `from`' do
       let(:from) { Time.utc 2020, 1, 2 }
       let(:to)   { Time.utc 2020, 1, 1 }
 
-      it { is_expected.to eq true }
+      it { is_expected.to be true }
     end
   end
 
@@ -660,7 +660,7 @@ describe Moments::Difference do
     end
   end
 
-  context '#in_seconds' do
+  describe '#in_seconds' do
     subject { Moments::Difference.new(from, to).in_seconds }
 
     include_examples 'in a component',
@@ -670,17 +670,17 @@ describe Moments::Difference do
                      when_days: (6 * 24 * 60 * 60) + (8 * 60 * 60) + (12 * 60) + 15,
                      when_months:
                        ((31 + 28 + 31 + 30) * 24 * 60 * 60) +
-                         (6 * 24 * 60 * 60) +
-                         (8 * 60 * 60) +
-                         (12 * 60) +
-                         15,
+                       (6 * 24 * 60 * 60) +
+                       (8 * 60 * 60) +
+                       (12 * 60) +
+                       15,
                      when_years:
                        (2 * 365 * 24 * 60 * 60) +
-                         ((31 + 28 + 31 + 30) * 24 * 60 * 60) +
-                         (6 * 24 * 60 * 60) +
-                         (8 * 60 * 60) +
-                         (12 * 60) +
-                         15
+                       ((31 + 28 + 31 + 30) * 24 * 60 * 60) +
+                       (6 * 24 * 60 * 60) +
+                       (8 * 60 * 60) +
+                       (12 * 60) +
+                       15
 
     context 'with miliseconds' do
       context 'when `to` is a bit greater' do
@@ -713,7 +713,7 @@ describe Moments::Difference do
     end
   end
 
-  context '#in_minutes' do
+  describe '#in_minutes' do
     subject { Moments::Difference.new(from, to).in_minutes }
 
     include_examples 'in a component',
@@ -723,18 +723,18 @@ describe Moments::Difference do
                      when_days: (6 * 24 * 60) + (8 * 60) + 12,
                      when_months:
                        ((31 + 28 + 31 + 30) * 24 * 60) +
-                         (6 * 24 * 60) +
-                         (8 * 60) +
-                         12,
+                       (6 * 24 * 60) +
+                       (8 * 60) +
+                       12,
                      when_years:
                        (2 * 365 * 24 * 60) +
-                         ((31 + 28 + 31 + 30) * 24 * 60) +
-                         (6 * 24 * 60) +
-                         (8 * 60) +
-                         12
+                       ((31 + 28 + 31 + 30) * 24 * 60) +
+                       (6 * 24 * 60) +
+                       (8 * 60) +
+                       12
   end
 
-  context '#in_hours' do
+  describe '#in_hours' do
     subject { Moments::Difference.new(from, to).in_hours }
 
     include_examples 'in a component',
@@ -744,16 +744,16 @@ describe Moments::Difference do
                      when_days: (6 * 24) + 8,
                      when_months:
                        ((31 + 28 + 31 + 30) * 24) +
-                         (6 * 24) +
-                         8,
+                       (6 * 24) +
+                       8,
                      when_years:
                        (2 * 365 * 24) +
-                         ((31 + 28 + 31 + 30) * 24) +
-                         (6 * 24) +
-                         8
+                       ((31 + 28 + 31 + 30) * 24) +
+                       (6 * 24) +
+                       8
   end
 
-  context '#in_days' do
+  describe '#in_days' do
     subject { Moments::Difference.new(from, to).in_days }
 
     include_examples 'in a component',
@@ -763,14 +763,14 @@ describe Moments::Difference do
                      when_days: 6,
                      when_months:
                        (31 + 28 + 31 + 30) +
-                         6,
+                       6,
                      when_years:
                        (2 * 365) +
-                         (31 + 28 + 31 + 30) +
-                         6
+                       (31 + 28 + 31 + 30) +
+                       6
   end
 
-  context '#in_months' do
+  describe '#in_months' do
     subject { Moments::Difference.new(from, to).in_months }
 
     include_examples 'in a component',
@@ -782,7 +782,7 @@ describe Moments::Difference do
                      when_years: (2 * 12) + 4
   end
 
-  context '#in_years' do
+  describe '#in_years' do
     subject { Moments::Difference.new(from, to).in_years }
 
     include_examples 'in a component',
@@ -808,10 +808,10 @@ describe Moments::Difference do
     end
   end
 
-  context '#humanized' do
+  describe '#humanized' do
     subject { Moments::Difference.new(from, to).humanized }
 
-    let (:from) { Time.utc 2020, 1, 1, 0, 0, 0 }
+    let(:from) { Time.utc 2020, 1, 1, 0, 0, 0 }
 
     {
       [2021, 1, 1, 0, 0, 0] => '1 year',
@@ -836,9 +836,9 @@ describe Moments::Difference do
       [2022, 4, 5, 5, 6, 7] => '2 years, 3 months, 4 days, 5 hours, 6 minutes and 7 seconds'
     }.each do |time_array, string|
       context "with #{string}" do
-        let (:to) { Time.utc *time_array }
+        let(:to) { Time.utc(*time_array) }
 
-        it { is_expected.to eq string}
+        it { is_expected.to eq string }
       end
     end
   end
