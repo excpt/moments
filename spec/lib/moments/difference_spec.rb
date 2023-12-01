@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe_class Moments::Difference do
+describe Moments::Difference do
   let(:from) { Time.utc 2007, 1, 1 }
   let(:to)   { Time.utc 2012, 1, 1 }
 

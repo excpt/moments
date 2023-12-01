@@ -2,9 +2,9 @@
 
 require 'timecop'
 
-describe_class Moments do
+describe Moments do
   describe '#difference' do
-    subject { Moments.difference(from, to) }
+    subject { described_class.difference(from, to) }
 
     let(:from) { Time.new 2012, 1, 1 }
     let(:to)   { Time.new 2013, 1, 1 }
@@ -13,7 +13,7 @@ describe_class Moments do
   end
 
   describe '#ago' do
-    subject { Moments.ago(from) }
+    subject { described_class.ago(from) }
 
     before do
       Timecop.freeze(to)
@@ -29,7 +29,7 @@ describe_class Moments do
     it { is_expected.to be_a Moments::Difference }
 
     describe '#to_hash' do
-      subject { Moments.ago(from).to_hash }
+      subject { described_class.ago(from).to_hash }
 
       let(:expected_result) do
         {

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe_class Moments::Difference do
+describe Moments::Difference do
   # Thu, 04 Aug 2022 15:52:25 MDT -06:00
   let(:from) { Time.new(2022, 8, 4, 15, 52, 25, '-06:00') }
   # Thu, 18 Aug 2022 15:52:31 MDT -06:00
