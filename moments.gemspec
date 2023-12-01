@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.required_ruby_version = '>= 2.5'
 
-  spec.add_development_dependency 'bundler', '~> 2.4'
+  spec.add_development_dependency 'bundler', '~> 2'
   spec.add_development_dependency 'github_changelog_generator', '~> 1.16'
   spec.add_development_dependency 'rake', '~> 13.1'
   spec.add_development_dependency 'rspec', '~> 3.12'
